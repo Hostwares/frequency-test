@@ -1,0 +1,113 @@
+{
+  "name": "CommunityPoll",
+  "type": "object",
+  "properties": {
+    "community_id": {
+      "type": "string",
+      "description": "Reference to FrequencyCommunity"
+    },
+    "author_user_id": {
+      "type": "string"
+    },
+    "author_name": {
+      "type": "string"
+    },
+    "question": {
+      "type": "string",
+      "maxLength": 280,
+      "description": "Poll question"
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 1000,
+      "description": "Optional context for the poll"
+    },
+    "options": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 2,
+      "maxItems": 6,
+      "description": "Poll option texts"
+    },
+    "votes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "user_id": {
+            "type": "string"
+          },
+          "option_index": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "user_id",
+          "option_index"
+        ]
+      },
+      "default": [],
+      "description": "All cast votes — each entry is a user + their chosen option index"
+    },
+    "closes_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the poll closes (optional)"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true
+    },
+    "is_pinned": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "required": [
+    "community_id",
+    "author_user_id",
+    "author_name",
+    "question",
+    "options"
+  ],
+  "rls": {
+    "read": {},
+    "create": {},
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    }
+  }
+}

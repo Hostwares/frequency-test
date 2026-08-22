@@ -1,0 +1,171 @@
+{
+  "name": "SupportGoal",
+  "type": "object",
+  "properties": {
+    "artist_profile_id": {
+      "type": "string",
+      "description": "Reference to ArtistProfile"
+    },
+    "artist_name": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string",
+      "description": "Goal title (e.g. 'Studio Time', 'Music Video', 'Tour Fuel')"
+    },
+    "description": {
+      "type": "string",
+      "description": "Optional details about the goal"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "studio",
+        "video",
+        "tour",
+        "equipment",
+        "production",
+        "marketing",
+        "living",
+        "other"
+      ],
+      "default": "studio",
+      "description": "Category of the goal"
+    },
+    "display_type": {
+      "type": "string",
+      "enum": [
+        "quantitative",
+        "percentage",
+        "binary",
+        "milestone"
+      ],
+      "default": "percentage",
+      "description": "How to display progress: quantitative (units), percentage (%), binary (Covered), milestone (status only)"
+    },
+    "unit_label": {
+      "type": "string",
+      "description": "Unit label for quantitative goals (e.g. 'hours', 'sessions', 'songs')"
+    },
+    "unit_value": {
+      "type": "number",
+      "description": "Dollar amount per unit (e.g. $50/hour for studio time)"
+    },
+    "target_amount": {
+      "type": "number",
+      "description": "Total dollar amount needed to fund this goal"
+    },
+    "current_amount": {
+      "type": "number",
+      "default": 0,
+      "description": "Amount funded so far (auto-updated from support or manually set)"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "funding",
+        "funded",
+        "in_progress",
+        "completed",
+        "started"
+      ],
+      "default": "funding",
+      "description": "Current status of the goal"
+    },
+    "month": {
+      "type": "string",
+      "description": "YYYY-MM format for monthly tracking"
+    },
+    "icon": {
+      "type": "string",
+      "description": "Emoji icon for the goal (e.g. 🎸, 🎬, 🚐, 🎤)"
+    },
+    "sort_order": {
+      "type": "number",
+      "default": 0
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "required": [
+    "artist_profile_id",
+    "title",
+    "display_type",
+    "target_amount"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "data.user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "data.user_id": "{{user.id}}"
+        },
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "data.user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "data.user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    }
+  }
+}

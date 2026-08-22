@@ -1,0 +1,285 @@
+{
+  "name": "BetaConfiguration",
+  "type": "object",
+  "properties": {
+    "beta_mode_enabled": {
+      "type": "boolean",
+      "default": false,
+      "description": "Master switch for The Mainstream Frequency beta mode"
+    },
+    "beta_registration_mode": {
+      "type": "string",
+      "enum": [
+        "open",
+        "invite_only",
+        "closed"
+      ],
+      "default": "invite_only",
+      "description": "Whether beta registrations are open, invite-only, or closed"
+    },
+    "beta_pricing_enabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether discounted beta pricing is active"
+    },
+    "founding_badges_enabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether founding member badges are displayed"
+    },
+    "beta_discounts_enabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether beta discounts are applied at checkout"
+    },
+    "beta_feedback_enabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether beta feedback and bug-report tools are available to users"
+    },
+    "beta_banners_enabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether beta notice banners are displayed platform-wide"
+    },
+    "beta_feature_flags_enabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether beta-only feature flags are active"
+    },
+    "beta_user_limit": {
+      "type": "number",
+      "default": 1000,
+      "description": "Maximum number of beta users allowed"
+    },
+    "beta_start_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the beta period officially began"
+    },
+    "beta_planned_end_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Planned end date for the beta period"
+    },
+    "beta_transition_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Scheduled date to begin transition from beta to public"
+    },
+    "public_launch_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Official full public launch date"
+    },
+    "public_pricing_effective_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When public (non-beta) pricing takes effect"
+    },
+    "deactivation_status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "transitioning",
+        "deactivated",
+        "rolled_back"
+      ],
+      "default": "active",
+      "description": "Current beta lifecycle state"
+    },
+    "deactivation_initiated_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When beta deactivation was initiated"
+    },
+    "deactivation_initiated_by_user_id": {
+      "type": "string"
+    },
+    "deactivation_initiated_by_name": {
+      "type": "string"
+    },
+    "deactivation_reason": {
+      "type": "string",
+      "description": "Written reason recorded when beta was deactivated"
+    },
+    "deactivation_decisions": {
+      "type": "object",
+      "description": "Choices made in the deactivation wizard",
+      "properties": {
+        "end_immediately": {
+          "type": "boolean"
+        },
+        "scheduled_end": {
+          "type": "boolean"
+        },
+        "keep_founding_prices_temporarily": {
+          "type": "boolean"
+        },
+        "move_members_to_public_pricing": {
+          "type": "boolean"
+        },
+        "preserve_founding_badges": {
+          "type": "boolean"
+        },
+        "disable_beta_only_features": {
+          "type": "boolean"
+        },
+        "convert_beta_accounts": {
+          "type": "boolean"
+        },
+        "send_user_notification": {
+          "type": "boolean"
+        },
+        "publish_launch_announcement": {
+          "type": "boolean"
+        }
+      }
+    },
+    "rollback_available_until": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Deadline (deactivation + 72 hours) until which beta can be restored"
+    },
+    "rollback_executed": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether a rollback to beta mode was performed"
+    },
+    "rollback_executed_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "exit_readiness": {
+      "type": "object",
+      "description": "Beta exit readiness checklist (key → boolean)",
+      "properties": {
+        "production_payments_active": {
+          "type": "boolean"
+        },
+        "public_prices_configured": {
+          "type": "boolean"
+        },
+        "terms_of_service_published": {
+          "type": "boolean"
+        },
+        "privacy_policy_published": {
+          "type": "boolean"
+        },
+        "refund_policy_published": {
+          "type": "boolean"
+        },
+        "artist_agreement_active": {
+          "type": "boolean"
+        },
+        "storage_tested": {
+          "type": "boolean"
+        },
+        "streaming_tested": {
+          "type": "boolean"
+        },
+        "email_notifications_tested": {
+          "type": "boolean"
+        },
+        "customer_support_active": {
+          "type": "boolean"
+        },
+        "backups_confirmed": {
+          "type": "boolean"
+        },
+        "analytics_confirmed": {
+          "type": "boolean"
+        },
+        "migration_plan_selected": {
+          "type": "boolean"
+        }
+      },
+      "default": {}
+    },
+    "readiness_override_reason": {
+      "type": "string",
+      "description": "Required written reason when Master Admin overrides an incomplete readiness checklist"
+    },
+    "readiness_overridden_by_user_id": {
+      "type": "string"
+    },
+    "readiness_overridden_by_name": {
+      "type": "string"
+    },
+    "readiness_override_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_by_user_id": {
+      "type": "string"
+    },
+    "updated_by_name": {
+      "type": "string"
+    },
+    "last_updated_date": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "beta_mode_enabled"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    }
+  }
+}

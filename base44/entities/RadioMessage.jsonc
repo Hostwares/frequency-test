@@ -1,0 +1,158 @@
+{
+  "name": "RadioMessage",
+  "type": "object",
+  "properties": {
+    "sender_user_id": {
+      "type": "string"
+    },
+    "recipient_user_id": {
+      "type": "string"
+    },
+    "sender_type": {
+      "type": "string",
+      "enum": [
+        "artist",
+        "radio_programmer"
+      ]
+    },
+    "recipient_type": {
+      "type": "string",
+      "enum": [
+        "artist",
+        "radio_programmer"
+      ]
+    },
+    "artist_profile_id": {
+      "type": "string"
+    },
+    "radio_programmer_id": {
+      "type": "string"
+    },
+    "song_id": {
+      "type": "string",
+      "description": "Song this message relates to (if applicable)"
+    },
+    "subject": {
+      "type": "string"
+    },
+    "message": {
+      "type": "string"
+    },
+    "message_type": {
+      "type": "string",
+      "enum": [
+        "general",
+        "follow_up",
+        "interview_request",
+        "station_id_request",
+        "additional_music_request",
+        "promotional_request"
+      ],
+      "default": "general"
+    },
+    "is_read": {
+      "type": "boolean",
+      "default": false
+    },
+    "is_archived": {
+      "type": "boolean",
+      "default": false
+    },
+    "is_blocked": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "required": [
+    "sender_user_id",
+    "recipient_user_id",
+    "sender_type",
+    "recipient_type",
+    "message"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "data.sender_user_id": "{{user.id}}"
+        },
+        {
+          "data.recipient_user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "data.sender_user_id": "{{user.id}}"
+        },
+        {
+          "data.recipient_user_id": "{{user.id}}"
+        },
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "data.sender_user_id": "{{user.id}}"
+        },
+        {
+          "data.recipient_user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "data.sender_user_id": "{{user.id}}"
+        },
+        {
+          "data.recipient_user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    }
+  }
+}

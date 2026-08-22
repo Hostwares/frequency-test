@@ -1,0 +1,149 @@
+{
+  "name": "AwardsNominee",
+  "type": "object",
+  "properties": {
+    "category_id": {
+      "type": "string",
+      "description": "Reference to AwardsCategory"
+    },
+    "category_name": {
+      "type": "string"
+    },
+    "nominee_name": {
+      "type": "string",
+      "description": "Name of the artist, song, release, or entity nominated"
+    },
+    "nominee_type": {
+      "type": "string",
+      "enum": [
+        "artist",
+        "song",
+        "release",
+        "community",
+        "discovery_partner",
+        "radio_programmer",
+        "editorial",
+        "live_performance"
+      ],
+      "description": "Type of nominee"
+    },
+    "artist_profile_id": {
+      "type": "string"
+    },
+    "song_id": {
+      "type": "string"
+    },
+    "release_id": {
+      "type": "string"
+    },
+    "community_id": {
+      "type": "string"
+    },
+    "bio": {
+      "type": "string",
+      "description": "Nominee biography shown on the nominee profile page"
+    },
+    "video_url": {
+      "type": "string",
+      "description": "YouTube or video URL for live performance nominees"
+    },
+    "nomination_reason": {
+      "type": "string",
+      "description": "Why this nominee was selected"
+    },
+    "supporting_metrics": {
+      "type": "object",
+      "description": "Objective platform metrics supporting the nomination",
+      "properties": {
+        "resonance_score": {
+          "type": "number"
+        },
+        "supporter_count": {
+          "type": "number"
+        },
+        "play_count": {
+          "type": "number"
+        },
+        "community_engagement": {
+          "type": "number"
+        },
+        "mainstream_first": {
+          "type": "boolean"
+        },
+        "heard_first": {
+          "type": "boolean"
+        },
+        "discovery_score": {
+          "type": "number"
+        }
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "eligible",
+        "nominated",
+        "shortlisted",
+        "winner",
+        "honorable_mention"
+      ],
+      "default": "eligible",
+      "description": "Nominee status in the awards cycle"
+    },
+    "year": {
+      "type": "number",
+      "description": "Awards cycle year"
+    },
+    "votes_count": {
+      "type": "number",
+      "default": 0
+    },
+    "cover_image": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "category_id",
+    "nominee_name",
+    "nominee_type",
+    "year"
+  ],
+  "rls": {
+    "read": {},
+    "create": {},
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,178 @@
+{
+  "name": "DirectMessage",
+  "type": "object",
+  "properties": {
+    "sender_user_id": {
+      "type": "string",
+      "description": "User sending the message"
+    },
+    "sender_name": {
+      "type": "string"
+    },
+    "sender_type": {
+      "type": "string",
+      "enum": [
+        "fan",
+        "artist",
+        "discovery_partner",
+        "radio_programmer",
+        "admin"
+      ],
+      "description": "Role of the sender"
+    },
+    "recipient_user_id": {
+      "type": "string",
+      "description": "User receiving the message"
+    },
+    "recipient_name": {
+      "type": "string"
+    },
+    "recipient_type": {
+      "type": "string",
+      "enum": [
+        "fan",
+        "artist",
+        "discovery_partner",
+        "radio_programmer",
+        "admin"
+      ],
+      "description": "Role of the recipient"
+    },
+    "artist_profile_id": {
+      "type": "string",
+      "description": "Related artist profile if message is to/from an artist"
+    },
+    "thread_id": {
+      "type": "string",
+      "description": "Conversation thread ID (sorted combination of user IDs)"
+    },
+    "body": {
+      "type": "string",
+      "maxLength": 5000,
+      "description": "Message content"
+    },
+    "attachments": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "File URLs attached to the message"
+    },
+    "is_read": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether the recipient has read this message"
+    },
+    "read_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "is_flagged": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether this message was flagged for moderation"
+    },
+    "flagged_reason": {
+      "type": "string"
+    },
+    "parent_message_id": {
+      "type": "string",
+      "description": "If this is a reply, references the original message"
+    },
+    "created_date": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "sender_user_id",
+    "recipient_user_id",
+    "thread_id",
+    "body"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "data.sender_user_id": "{{user.id}}"
+        },
+        {
+          "data.recipient_user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "data.sender_user_id": "{{user.id}}"
+        },
+        {
+          "data.recipient_user_id": "{{user.id}}"
+        },
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "data.sender_user_id": "{{user.id}}"
+        },
+        {
+          "data.recipient_user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "data.sender_user_id": "{{user.id}}"
+        },
+        {
+          "data.recipient_user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    }
+  }
+}

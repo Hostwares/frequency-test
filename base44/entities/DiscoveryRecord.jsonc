@@ -1,0 +1,180 @@
+{
+  "name": "DiscoveryRecord",
+  "type": "object",
+  "properties": {
+    "song_id": {
+      "type": "string",
+      "description": "Reference to Song entity"
+    },
+    "song_title": {
+      "type": "string",
+      "description": "Song title (denormalized for permanent record)"
+    },
+    "artist_profile_id": {
+      "type": "string",
+      "description": "Reference to ArtistProfile"
+    },
+    "artist_name": {
+      "type": "string"
+    },
+    "genre": {
+      "type": "string",
+      "description": "Primary genre of the song at time of record creation"
+    },
+    "cover_art": {
+      "type": "string",
+      "description": "Cover art URL"
+    },
+    "first_release_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Date the song first debuted on The Mainstream Frequency"
+    },
+    "exclusive_period_start": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the 12-week Mainstream First exclusive period began"
+    },
+    "exclusive_period_end": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the 12-week exclusive period ended (week 13 transition)"
+    },
+    "transitioned_to_heard_first": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether the song has transitioned from Mainstream First to Heard First"
+    },
+    "transitioned_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Date the song was moved to Heard First on The Mainstream collection"
+    },
+    "first_listeners_count": {
+      "type": "number",
+      "default": 0,
+      "description": "Number of First Listeners during the exclusive period"
+    },
+    "original_supporters_count": {
+      "type": "number",
+      "default": 0,
+      "description": "Number of Original Supporters who supported during the first 12 weeks"
+    },
+    "discovery_partners_count": {
+      "type": "number",
+      "default": 0,
+      "description": "Number of Discovery Partners who recommended the song"
+    },
+    "radio_programmers_count": {
+      "type": "number",
+      "default": 0,
+      "description": "Number of Radio Programmers who downloaded the track"
+    },
+    "frequency_communities_count": {
+      "type": "number",
+      "default": 0,
+      "description": "Number of Frequency Communities that adopted the song"
+    },
+    "first_playlist_id": {
+      "type": "string",
+      "description": "ID of the first playlist that featured this song"
+    },
+    "first_playlist_name": {
+      "type": "string",
+      "description": "Name of the first playlist that featured this song"
+    },
+    "genre_playlist_name": {
+      "type": "string",
+      "description": "The auto-generated Heard First genre playlist this song was added to"
+    },
+    "snapshot_play_count": {
+      "type": "number",
+      "default": 0,
+      "description": "Play count at the time of transition to Heard First"
+    },
+    "snapshot_support_count": {
+      "type": "number",
+      "default": 0,
+      "description": "Support count at the time of transition"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "required": [
+    "song_id",
+    "song_title",
+    "first_release_date"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    }
+  }
+}

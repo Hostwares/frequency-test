@@ -1,0 +1,129 @@
+{
+  "name": "AuditLog",
+  "type": "object",
+  "properties": {
+    "user_id": {
+      "type": "string",
+      "description": "User who performed the action"
+    },
+    "user_name": {
+      "type": "string"
+    },
+    "user_email": {
+      "type": "string"
+    },
+    "user_role": {
+      "type": "string",
+      "enum": [
+        "fan",
+        "artist",
+        "admin",
+        "master_admin",
+        "discovery_partner",
+        "radio_programmer"
+      ],
+      "default": "fan"
+    },
+    "action": {
+      "type": "string",
+      "description": "What action was taken (e.g. 'login', 'create_song', 'delete_user', 'update_settings')"
+    },
+    "action_category": {
+      "type": "string",
+      "enum": [
+        "auth",
+        "content",
+        "payment",
+        "admin",
+        "security",
+        "profile",
+        "community",
+        "moderation"
+      ],
+      "description": "Category of the action"
+    },
+    "entity_type": {
+      "type": "string",
+      "description": "Type of entity affected (e.g. 'Song', 'User', 'Order')"
+    },
+    "entity_id": {
+      "type": "string"
+    },
+    "details": {
+      "type": "string",
+      "description": "Additional details about the action"
+    },
+    "ip_address": {
+      "type": "string"
+    },
+    "user_agent": {
+      "type": "string"
+    },
+    "is_security_event": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether this is a security-relevant event (failed login, password change, etc.)"
+    },
+    "is_master_admin_action": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether this action was performed by the Master Administrator. Every master admin action is logged with this flag set to true and severity 'critical'. These records are immutable \u2014 they cannot be updated or deleted by any account, including the Master Administrator itself. Only the Master Administrator can read audit log records."
+    },
+    "severity": {
+      "type": "string",
+      "enum": [
+        "info",
+        "warning",
+        "critical"
+      ],
+      "default": "info"
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Additional event context including previous_value and new_value for change tracking",
+      "properties": {
+        "previous_value": {
+          "description": "Previous value before the change"
+        },
+        "new_value": {
+          "description": "New value after the change"
+        }
+      }
+    }
+  },
+  "required": [
+    "user_id",
+    "action"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "master_admin"
+      }
+    },
+    "create": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "user_condition": {
+        "role": "immutable_no_access"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "immutable_no_access"
+      }
+    }
+  }
+}

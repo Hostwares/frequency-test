@@ -1,0 +1,252 @@
+{
+  "name": "Order",
+  "type": "object",
+  "properties": {
+    "order_number": {
+      "type": "string",
+      "description": "Unique order identifier"
+    },
+    "fan_user_id": {
+      "type": "string",
+      "description": "Customer user ID"
+    },
+    "fan_name": {
+      "type": "string"
+    },
+    "fan_email": {
+      "type": "string"
+    },
+    "artist_profile_id": {
+      "type": "string",
+      "description": "Artist selling the product or receiving support"
+    },
+    "artist_name": {
+      "type": "string"
+    },
+    "payment_type": {
+      "type": "string",
+      "enum": [
+        "merch",
+        "tickets",
+        "donation",
+        "support",
+        "subscription"
+      ],
+      "default": "merch",
+      "description": "Type of payment transaction"
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "product_id": {
+            "type": "string"
+          },
+          "product_title": {
+            "type": "string"
+          },
+          "quantity": {
+            "type": "number"
+          },
+          "price": {
+            "type": "number"
+          },
+          "variant": {
+            "type": "string"
+          },
+          "digital_file_url": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "event_id": {
+      "type": "string",
+      "description": "Reference to Event entity (for ticket purchases)"
+    },
+    "event_title": {
+      "type": "string",
+      "description": "Event title (for ticket orders)"
+    },
+    "ticket_quantity": {
+      "type": "number",
+      "default": 0,
+      "description": "Number of tickets purchased"
+    },
+    "subscription_id": {
+      "type": "string",
+      "description": "Wix subscription ID for recurring support payments"
+    },
+    "checkout_session_id": {
+      "type": "string",
+      "description": "Wix checkout session ID for correlating webhook events"
+    },
+    "processed_event_id": {
+      "type": "string",
+      "description": "Wix webhook event ID recorded when the order_approved webhook was processed, used for idempotency deduplication"
+    },
+    "is_recurring": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether this is a recurring subscription payment"
+    },
+    "subtotal": {
+      "type": "number",
+      "description": "Subtotal before shipping and fees"
+    },
+    "shipping_cost": {
+      "type": "number",
+      "default": 0
+    },
+    "platform_fee": {
+      "type": "number",
+      "description": "Platform percentage fee (15%)"
+    },
+    "artist_earnings": {
+      "type": "number",
+      "description": "Amount artist receives after fees (85%)"
+    },
+    "total": {
+      "type": "number",
+      "description": "Total order amount"
+    },
+    "payment_status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "paid",
+        "refunded",
+        "failed"
+      ],
+      "default": "pending"
+    },
+    "fulfillment_status": {
+      "type": "string",
+      "enum": [
+        "unfulfilled",
+        "processing",
+        "shipped",
+        "delivered",
+        "digital_delivered"
+      ],
+      "default": "unfulfilled"
+    },
+    "shipping_address": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "address_line1": {
+          "type": "string"
+        },
+        "address_line2": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "postal_code": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        }
+      }
+    },
+    "tracking_number": {
+      "type": "string"
+    },
+    "tracking_url": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "string"
+    },
+    "created_date": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "order_number",
+    "fan_user_id",
+    "artist_profile_id",
+    "items",
+    "total"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "data.fan_user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "data.fan_user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "data.fan_user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "data.fan_user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,235 @@
+{
+  "name": "RadioProgrammer",
+  "type": "object",
+  "properties": {
+    "user_id": {
+      "type": "string",
+      "description": "Reference to User entity"
+    },
+    "station_id": {
+      "type": "string",
+      "description": "Reference to the RadioStation this programmer seat is assigned to. Set when a radio account holder is added as a programmer seat on a station (multi-programmer seat management). Null for independent/unassigned programmers."
+    },
+    "station_name": {
+      "type": "string",
+      "description": "Radio station or network name"
+    },
+    "station_type": {
+      "type": "string",
+      "enum": [
+        "fm_radio",
+        "am_radio",
+        "college_radio",
+        "public_radio",
+        "internet_radio",
+        "digital_radio_network",
+        "satellite_radio",
+        "independent_broadcaster"
+      ],
+      "description": "Type of radio station or network"
+    },
+    "role": {
+      "type": "string",
+      "enum": [
+        "music_director",
+        "program_director",
+        "specialty_show_host",
+        "on_air_personality",
+        "station_manager",
+        "independent_curator"
+      ],
+      "description": "Professional role at the station"
+    },
+    "station_website": {
+      "type": "string",
+      "description": "Official station website URL"
+    },
+    "station_email": {
+      "type": "string",
+      "description": "Official station contact email"
+    },
+    "location": {
+      "type": "string",
+      "description": "Station location (city, state)"
+    },
+    "station_logo": {
+      "type": "string",
+      "description": "Station logo image URL"
+    },
+    "station_format": {
+      "type": "string",
+      "description": "Station format (e.g., AAA, Top 40, Jazz, Rock)"
+    },
+    "genres_supported": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Music genres the station supports"
+    },
+    "audience_description": {
+      "type": "string",
+      "description": "Description of station audience"
+    },
+    "social_links": {
+      "type": "object",
+      "properties": {
+        "facebook": {
+          "type": "string"
+        },
+        "twitter": {
+          "type": "string"
+        },
+        "instagram": {
+          "type": "string"
+        },
+        "linkedin": {
+          "type": "string"
+        }
+      }
+    },
+    "fcc_info": {
+      "type": "string",
+      "description": "FCC call sign or license information (if applicable)"
+    },
+    "linkedin_profile": {
+      "type": "string",
+      "description": "LinkedIn profile URL for verification"
+    },
+    "is_verified": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether the programmer has been verified"
+    },
+    "verification_status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "under_review",
+        "verified",
+        "rejected"
+      ],
+      "default": "pending"
+    },
+    "verification_notes": {
+      "type": "string",
+      "description": "Admin notes for verification"
+    },
+    "radio_discovery_score": {
+      "type": "number",
+      "default": 0,
+      "description": "Discovery score based on artist feedback and activity"
+    },
+    "total_adds": {
+      "type": "number",
+      "default": 0,
+      "description": "Total songs added to rotation"
+    },
+    "total_downloads": {
+      "type": "number",
+      "default": 0,
+      "description": "Total songs downloaded"
+    },
+    "response_time_hours": {
+      "type": "number",
+      "default": 0,
+      "description": "Average response time to artist messages"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true
+    },
+    "allow_artist_communication": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether artists can contact this programmer"
+    },
+    "public_contact_info": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether to show contact info publicly"
+    }
+  },
+  "required": [
+    "user_id",
+    "station_name",
+    "station_type",
+    "role"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "data.user_id": "{{user.id}}"
+        },
+        {
+          "data.station_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "data.user_id": "{{user.id}}"
+        },
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "data.user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "data.user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    }
+  }
+}

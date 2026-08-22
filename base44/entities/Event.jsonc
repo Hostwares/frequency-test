@@ -1,0 +1,191 @@
+{
+  "name": "Event",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "event_type": {
+      "type": "string",
+      "enum": [
+        "live_show",
+        "virtual_show",
+        "listening_party",
+        "festival",
+        "meetup"
+      ],
+      "default": "live_show"
+    },
+    "artist_profile_id": {
+      "type": "string"
+    },
+    "community_id": {
+      "type": "string"
+    },
+    "date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "location": {
+      "type": "string"
+    },
+    "is_virtual": {
+      "type": "boolean",
+      "default": false
+    },
+    "ticket_price": {
+      "type": "number",
+      "default": 0
+    },
+    "cover_image": {
+      "type": "string"
+    },
+    "attendee_count": {
+      "type": "number",
+      "default": 0
+    },
+    "max_capacity": {
+      "type": "number"
+    },
+    "livestream_url": {
+      "type": "string",
+      "description": "URL for the livestream (YouTube, Twitch, custom player)"
+    },
+    "replay_url": {
+      "type": "string",
+      "description": "URL for the recorded replay after the event"
+    },
+    "stream_status": {
+      "type": "string",
+      "enum": [
+        "upcoming",
+        "live",
+        "ended",
+        "replay_available"
+      ],
+      "default": "upcoming"
+    },
+    "stream_start_time": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the livestream starts"
+    },
+    "stream_end_time": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the livestream ends"
+    },
+    "has_seating": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether this event has assigned seating"
+    },
+    "seating_chart_type": {
+      "type": "string",
+      "enum": [
+        "general_admission",
+        "assigned",
+        "standing",
+        "mixed"
+      ],
+      "default": "general_admission"
+    },
+    "rsvp_count": {
+      "type": "number",
+      "default": 0
+    },
+    "check_in_count": {
+      "type": "number",
+      "default": 0
+    },
+    "is_free": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether this is a free event (no ticket required)"
+    },
+    "is_livestreamed": {
+      "type": "boolean",
+      "default": false
+    },
+    "has_replay": {
+      "type": "boolean",
+      "default": false
+    },
+    "subscription_required": {
+      "type": "string",
+      "enum": [
+        "none",
+        "free",
+        "supporter",
+        "premium_supporter",
+        "champion"
+      ],
+      "default": "none",
+      "description": "Minimum subscription tier required for access"
+    },
+    "pitch_ready": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether this event is flagged as Pitch Ready for editorial coverage"
+    },
+    "pitch_notes": {
+      "type": "string",
+      "description": "Editorial notes about why this event is newsworthy"
+    },
+    "pitch_ready_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the event was marked as Pitch Ready"
+    },
+    "pitch_alert_sent": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether the Pitch Ready journalist alert has been sent"
+    }
+  },
+  "required": [
+    "title",
+    "date"
+  ],
+  "rls": {
+    "read": {},
+    "create": {},
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    }
+  }
+}

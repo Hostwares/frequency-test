@@ -1,0 +1,34 @@
+{
+  "name": "The Mainstream Frequency",
+  "short_name": "Frequency",
+  "description": "A relationship-first music community where fans directly fund and discover artists, building vibrant music networks instead of relying on algorithms.",
+  "id": "/",
+  "start_url": "/?source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
+  "orientation": "any",
+  "background_color": "#0b0a14",
+  "theme_color": "#a855f7",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": ["music", "entertainment", "social"],
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "icons": [
+    { "src": "https://media.base44.com/images/public/6a36dc5db470c51b499adc6f/136f5b21f_generated_image.png", "sizes": "96x96", "type": "image/png", "purpose": "any" },
+    { "src": "https://media.base44.com/images/public/6a36dc5db470c51b499adc6f/136f5b21f_generated_image.png", "sizes": "144x144", "type": "image/png", "purpose": "any" },
+    { "src": "https://media.base44.com/images/public/6a36dc5db470c51b499adc6f/136f5b21f_generated_image.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "https://media.base44.com/images/public/6a36dc5db470c51b499adc6f/136f5b21f_generated_image.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "https://media.base44.com/images/public/6a36dc5db470c51b499adc6f/136f5b21f_generated_image.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "https://media.base44.com/images/public/6a36dc5db470c51b499adc6f/136f5b21f_generated_image.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
+    { "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "/icon-maskable.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Home", "short_name": "Home", "url": "/?source=pwa_shortcut", "icons": [{ "src": "/icon.svg", "sizes": "any" }] },
+    { "name": "Frequencies", "short_name": "Frequencies", "url": "/frequencies?source=pwa_shortcut", "icons": [{ "src": "/icon.svg", "sizes": "any" }] },
+    { "name": "Playlists", "short_name": "Playlists", "url": "/playlists?source=pwa_shortcut", "icons": [{ "src": "/icon.svg", "sizes": "any" }] },
+    { "name": "Wallet", "short_name": "Wallet", "url": "/wallet?source=pwa_shortcut", "icons": [{ "src": "/icon.svg", "sizes": "any" }] }
+  ]
+}

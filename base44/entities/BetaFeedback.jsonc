@@ -1,0 +1,132 @@
+{
+  "name": "BetaFeedback",
+  "type": "object",
+  "properties": {
+    "feedback_type": {
+      "type": "string",
+      "enum": [
+        "bug",
+        "suggestion",
+        "other"
+      ],
+      "default": "suggestion",
+      "description": "Type of beta feedback"
+    },
+    "subject": {
+      "type": "string",
+      "description": "Short title of the report or suggestion"
+    },
+    "message": {
+      "type": "string",
+      "description": "Full feedback details"
+    },
+    "page_path": {
+      "type": "string",
+      "description": "App route where the feedback was submitted"
+    },
+    "user_id": {
+      "type": "string"
+    },
+    "user_name": {
+      "type": "string"
+    },
+    "user_email": {
+      "type": "string"
+    },
+    "user_agent": {
+      "type": "string",
+      "description": "Browser/device info at time of submission"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "new",
+        "reviewed",
+        "resolved"
+      ],
+      "default": "new",
+      "description": "Review status managed by admins"
+    },
+    "admin_notes": {
+      "type": "string",
+      "description": "Internal admin notes captured during review"
+    }
+  },
+  "required": [
+    "feedback_type",
+    "message"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "data.user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "data.user_id": "{{user.id}}"
+        },
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "data.user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "data.user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    }
+  }
+}

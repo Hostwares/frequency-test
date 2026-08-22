@@ -1,0 +1,142 @@
+{
+  "name": "ArtistSubmission",
+  "type": "object",
+  "properties": {
+    "artist_profile_id": {
+      "type": "string"
+    },
+    "artist_user_id": {
+      "type": "string"
+    },
+    "artist_name": {
+      "type": "string"
+    },
+    "discovery_partner_id": {
+      "type": "string"
+    },
+    "song_id": {
+      "type": "string"
+    },
+    "album": {
+      "type": "string"
+    },
+    "genre": {
+      "type": "string"
+    },
+    "frequency_community_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "artist_message": {
+      "type": "string"
+    },
+    "press_info": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "saved_for_later",
+        "accepted",
+        "rejected",
+        "featured",
+        "recommended"
+      ],
+      "default": "pending"
+    },
+    "partner_notes": {
+      "type": "string"
+    },
+    "submission_fee_paid": {
+      "type": "number",
+      "default": 0
+    },
+    "recommended_to_community_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "artist_profile_id",
+    "discovery_partner_id",
+    "artist_name"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "data.artist_user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "data.artist_user_id": "{{user.id}}"
+        },
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "data.artist_user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "data.artist_user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    }
+  }
+}

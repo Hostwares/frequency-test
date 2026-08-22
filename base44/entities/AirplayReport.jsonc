@@ -1,0 +1,146 @@
+{
+  "name": "AirplayReport",
+  "type": "object",
+  "properties": {
+    "radio_programmer_id": {
+      "type": "string",
+      "description": "Programmer reporting the airplay"
+    },
+    "station_name": {
+      "type": "string"
+    },
+    "artist_profile_id": {
+      "type": "string",
+      "description": "Artist whose song was played"
+    },
+    "song_id": {
+      "type": "string"
+    },
+    "song_title": {
+      "type": "string"
+    },
+    "report_type": {
+      "type": "string",
+      "enum": [
+        "add",
+        "spin",
+        "rotation_change",
+        "featured",
+        "removed"
+      ],
+      "description": "Type of airplay activity"
+    },
+    "rotation_status": {
+      "type": "string",
+      "enum": [
+        "light_rotation",
+        "medium_rotation",
+        "heavy_rotation",
+        "featured",
+        "one_time_play"
+      ]
+    },
+    "spin_count": {
+      "type": "number",
+      "default": 1,
+      "description": "Number of times played"
+    },
+    "play_dates": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "date-time"
+      },
+      "description": "Dates when song was played"
+    },
+    "show_name": {
+      "type": "string",
+      "description": "Specific show or program name"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Programmer notes about the song"
+    },
+    "is_private": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether this report is private to the artist"
+    }
+  },
+  "required": [
+    "radio_programmer_id",
+    "artist_profile_id",
+    "song_id",
+    "report_type"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    }
+  }
+}

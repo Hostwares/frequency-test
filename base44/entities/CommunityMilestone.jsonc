@@ -1,0 +1,89 @@
+{
+  "name": "CommunityMilestone",
+  "type": "object",
+  "properties": {
+    "community_id": {
+      "type": "string",
+      "description": "Reference to FrequencyCommunity"
+    },
+    "community_name": {
+      "type": "string"
+    },
+    "milestone_type": {
+      "type": "string",
+      "enum": [
+        "membership",
+        "support",
+        "engagement"
+      ],
+      "description": "Type of milestone reached"
+    },
+    "milestone_value": {
+      "type": "number",
+      "description": "The milestone threshold reached (e.g., 1000 members, $5000 support)"
+    },
+    "current_value": {
+      "type": "number",
+      "description": "Current actual value when milestone was reached"
+    },
+    "notification_sent": {
+      "type": "boolean",
+      "default": false
+    },
+    "notified_managers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "User IDs of community managers who were notified"
+    },
+    "created_date": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "community_id",
+    "community_name",
+    "milestone_type",
+    "milestone_value"
+  ],
+  "rls": {
+    "read": {},
+    "create": {},
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    }
+  }
+}

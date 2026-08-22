@@ -1,0 +1,222 @@
+{
+  "name": "RadioDownload",
+  "type": "object",
+  "properties": {
+    "radio_programmer_id": {
+      "type": "string"
+    },
+    "programmer_name": {
+      "type": "string"
+    },
+    "station_name": {
+      "type": "string"
+    },
+    "artist_profile_id": {
+      "type": "string"
+    },
+    "artist_name": {
+      "type": "string"
+    },
+    "song_id": {
+      "type": "string"
+    },
+    "song_title": {
+      "type": "string"
+    },
+    "download_type": {
+      "type": "string",
+      "enum": [
+        "radio_edit",
+        "clean_edit",
+        "explicit_version",
+        "instrumental",
+        "full_track",
+        "press_kit"
+      ],
+      "description": "Type of track downloaded"
+    },
+    "download_format": {
+      "type": "string",
+      "enum": [
+        "wav",
+        "mp3",
+        "both"
+      ],
+      "description": "Audio format downloaded"
+    },
+    "activity_type": {
+      "type": "string",
+      "enum": [
+        "streamed",
+        "downloaded",
+        "saved",
+        "added_to_watchlist",
+        "added_to_rotation",
+        "favorited"
+      ],
+      "description": "Type of interaction with the track/artist"
+    },
+    "radio_status": {
+      "type": "string",
+      "enum": [
+        "received",
+        "reviewing",
+        "saved",
+        "added",
+        "light_rotation",
+        "medium_rotation",
+        "heavy_rotation",
+        "featured"
+      ],
+      "default": "received"
+    },
+    "review_priority": {
+      "type": "string",
+      "enum": [
+        "high",
+        "medium",
+        "low"
+      ],
+      "default": "medium",
+      "description": "Priority ranking for internal review"
+    },
+    "review_status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "shortlist",
+        "rejected"
+      ],
+      "default": "pending",
+      "description": "Internal review status for potential airplay"
+    },
+    "spin_count": {
+      "type": "number",
+      "default": 0,
+      "description": "Total spins logged for this track"
+    },
+    "last_spin_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Last time this track was spun"
+    },
+    "metadata_snapshot": {
+      "type": "object",
+      "description": "Song metadata captured at download time",
+      "properties": {
+        "bpm": {
+          "type": "number"
+        },
+        "key_signature": {
+          "type": "string"
+        },
+        "genre": {
+          "type": "string"
+        },
+        "mood": {
+          "type": "string"
+        },
+        "duration_seconds": {
+          "type": "number"
+        },
+        "isrc": {
+          "type": "string"
+        },
+        "explicit": {
+          "type": "boolean"
+        },
+        "vocal_type": {
+          "type": "string"
+        }
+      }
+    },
+    "internal_notes": {
+      "type": "string",
+      "description": "Private notes from the programmer"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Programmer's private notes"
+    },
+    "is_private": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "required": [
+    "radio_programmer_id",
+    "artist_profile_id",
+    "song_id",
+    "activity_type"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,141 @@
+{
+  "name": "SplitAuditLog",
+  "type": "object",
+  "properties": {
+    "split_id": {
+      "type": "string",
+      "description": "Reference to RevenueSplit"
+    },
+    "split_name": {
+      "type": "string"
+    },
+    "artist_profile_id": {
+      "type": "string"
+    },
+    "user_id": {
+      "type": "string",
+      "description": "User who performed the action"
+    },
+    "user_name": {
+      "type": "string"
+    },
+    "action": {
+      "type": "string",
+      "enum": [
+        "created",
+        "updated",
+        "archived",
+        "deleted",
+        "activated",
+        "deactivated",
+        "duplicated",
+        "collaborator_added",
+        "collaborator_removed",
+        "percentage_changed",
+        "approval_changed",
+        "payment_changed",
+        "revenue_adjustment"
+      ],
+      "description": "The action performed on the split"
+    },
+    "action_category": {
+      "type": "string",
+      "enum": [
+        "split_management",
+        "collaborator_management",
+        "approval",
+        "payment",
+        "revenue"
+      ]
+    },
+    "details": {
+      "type": "string",
+      "description": "Human-readable description of the change"
+    },
+    "previous_split_state": {
+      "type": "object",
+      "description": "Snapshot of the split before the change"
+    },
+    "updated_split_state": {
+      "type": "object",
+      "description": "Snapshot of the split after the change"
+    },
+    "collaborator_name": {
+      "type": "string",
+      "description": "Collaborator involved in the action (if applicable)"
+    },
+    "previous_percentage": {
+      "type": "number"
+    },
+    "new_percentage": {
+      "type": "number"
+    },
+    "revenue_adjustment": {
+      "type": "number",
+      "description": "Amount of revenue adjustment (if applicable)"
+    }
+  },
+  "required": [
+    "split_id",
+    "user_id",
+    "action"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    }
+  }
+}

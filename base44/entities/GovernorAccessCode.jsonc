@@ -1,0 +1,122 @@
+{
+  "name": "GovernorAccessCode",
+  "type": "object",
+  "properties": {
+    "member_id": {
+      "type": "string",
+      "description": "Reference to AcademyMember"
+    },
+    "user_id": {
+      "type": "string",
+      "description": "The governor's user ID"
+    },
+    "governor_name": {
+      "type": "string",
+      "description": "Governor display name"
+    },
+    "governor_email": {
+      "type": "string",
+      "description": "Email the code was sent to"
+    },
+    "access_code": {
+      "type": "string",
+      "description": "Unique one-time access code (8 chars, uppercase)"
+    },
+    "is_used": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether this code has been redeemed"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether this code is still valid (false = revoked by admin)"
+    },
+    "generated_by_admin_id": {
+      "type": "string"
+    },
+    "generated_by_admin_name": {
+      "type": "string"
+    },
+    "generated_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "used_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "expires_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the code expires (default 7 days)"
+    },
+    "purpose": {
+      "type": "string",
+      "description": "Why this code was issued"
+    }
+  },
+  "required": [
+    "member_id",
+    "user_id",
+    "access_code"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,220 @@
+{
+  "name": "RightsClaim",
+  "type": "object",
+  "properties": {
+    "song_id": {
+      "type": "string",
+      "description": "Song being claimed against"
+    },
+    "song_title": {
+      "type": "string"
+    },
+    "artist_profile_id": {
+      "type": "string"
+    },
+    "claimant_user_id": {
+      "type": "string",
+      "description": "User filing the claim"
+    },
+    "claimant_name": {
+      "type": "string"
+    },
+    "claim_type": {
+      "type": "string",
+      "enum": [
+        "copyright_infringement",
+        "ownership_dispute",
+        "unauthorized_use",
+        "split_dispute",
+        "mechanical_rights_dispute",
+        "publishing_dispute",
+        "neighboring_rights_dispute",
+        "master_ownership_dispute"
+      ],
+      "description": "Type of rights claim"
+    },
+    "rights_category": {
+      "type": "string",
+      "enum": [
+        "master_ownership",
+        "publishing",
+        "mechanical",
+        "neighboring",
+        "performance",
+        "synchronization"
+      ],
+      "description": "Which rights category is disputed"
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 5000,
+      "description": "Detailed description of the claim"
+    },
+    "evidence_urls": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "URLs to evidence documents"
+    },
+    "original_work_title": {
+      "type": "string",
+      "description": "Title of the original work being infringed"
+    },
+    "original_work_url": {
+      "type": "string",
+      "description": "URL to the original work"
+    },
+    "claimed_percentage": {
+      "type": "number",
+      "description": "Percentage of rights claimed"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "under_review",
+        "co_owner_notified",
+        "resolved_upheld",
+        "resolved_dismissed",
+        "withdrawn",
+        "escalated"
+      ],
+      "default": "pending"
+    },
+    "priority": {
+      "type": "string",
+      "enum": [
+        "low",
+        "medium",
+        "high",
+        "urgent"
+      ],
+      "default": "medium"
+    },
+    "co_owner_approval_required": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether co-owner approval is needed to resolve"
+    },
+    "co_owner_approved": {
+      "type": "boolean",
+      "default": false
+    },
+    "reviewed_by": {
+      "type": "string"
+    },
+    "resolution_notes": {
+      "type": "string"
+    },
+    "takedown_issued": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether a takedown was issued"
+    },
+    "takedown_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "resolved_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "licensing_permission": {
+      "type": "string",
+      "enum": [
+        "granted",
+        "denied",
+        "pending",
+        "not_applicable"
+      ],
+      "default": "not_applicable",
+      "description": "Licensing permission outcome"
+    },
+    "territory_restrictions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Territories affected by this claim"
+    }
+  },
+  "required": [
+    "song_id",
+    "song_title",
+    "claimant_user_id",
+    "claimant_name",
+    "claim_type",
+    "description"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    }
+  }
+}

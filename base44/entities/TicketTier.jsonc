@@ -1,0 +1,131 @@
+{
+  "name": "TicketTier",
+  "type": "object",
+  "properties": {
+    "event_id": {
+      "type": "string",
+      "description": "Reference to Event entity"
+    },
+    "event_title": {
+      "type": "string"
+    },
+    "artist_profile_id": {
+      "type": "string",
+      "description": "Artist hosting the event"
+    },
+    "tier_name": {
+      "type": "string",
+      "description": "Ticket tier name (e.g. General Admission, VIP, Meet & Greet)"
+    },
+    "tier_type": {
+      "type": "string",
+      "enum": [
+        "general_admission",
+        "vip",
+        "meet_greet",
+        "early_bird",
+        "backstage",
+        "livestream",
+        "group",
+        "other"
+      ],
+      "default": "general_admission"
+    },
+    "price": {
+      "type": "number",
+      "description": "Ticket price in dollars"
+    },
+    "description": {
+      "type": "string",
+      "description": "What's included with this ticket tier"
+    },
+    "quantity_available": {
+      "type": "number",
+      "description": "Total tickets available in this tier"
+    },
+    "quantity_sold": {
+      "type": "number",
+      "default": 0,
+      "description": "Tickets sold so far"
+    },
+    "quantity_remaining": {
+      "type": "number",
+      "default": 0,
+      "description": "Tickets still available"
+    },
+    "sale_start_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When this tier goes on sale"
+    },
+    "sale_end_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When this tier stops being available"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true
+    },
+    "perks": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of perks included (e.g. 'Early entry', 'Signed poster')"
+    },
+    "min_per_order": {
+      "type": "number",
+      "default": 1
+    },
+    "max_per_order": {
+      "type": "number",
+      "default": 8,
+      "description": "Maximum tickets per order for this tier"
+    }
+  },
+  "required": [
+    "event_id",
+    "tier_name",
+    "price",
+    "quantity_available"
+  ],
+  "rls": {
+    "read": {},
+    "create": {},
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    }
+  }
+}

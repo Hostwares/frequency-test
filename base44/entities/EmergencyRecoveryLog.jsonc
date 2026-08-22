@@ -1,0 +1,112 @@
+{
+  "name": "EmergencyRecoveryLog",
+  "type": "object",
+  "properties": {
+    "recovery_access_id": {
+      "type": "string",
+      "description": "Reference to the EmergencyRecoveryAccess record used"
+    },
+    "master_admin_user_id": {
+      "type": "string",
+      "description": "Master admin user associated with the recovery attempt"
+    },
+    "master_admin_email": {
+      "type": "string"
+    },
+    "action": {
+      "type": "string",
+      "enum": [
+        "recovery_code_submitted",
+        "verification_challenge_sent",
+        "verification_completed",
+        "access_granted",
+        "access_denied",
+        "code_revoked",
+        "recovery_setup"
+      ],
+      "description": "The specific action within the emergency recovery flow"
+    },
+    "was_successful": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether this step succeeded"
+    },
+    "failure_reason": {
+      "type": "string",
+      "description": "Why this step failed, if applicable"
+    },
+    "verification_method": {
+      "type": "string",
+      "enum": [
+        "email_code",
+        "backup_code",
+        "totp"
+      ],
+      "default": "email_code",
+      "description": "The verification method used for the secondary verification step"
+    },
+    "ip_address": {
+      "type": "string",
+      "description": "Source IP address of the recovery attempt"
+    },
+    "user_agent": {
+      "type": "string",
+      "description": "Browser/device user agent of the recovery attempt"
+    },
+    "granted_session_id": {
+      "type": "string",
+      "description": "Temporary session identifier if elevated access was granted"
+    },
+    "session_expires_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the temporary elevated access session expires"
+    },
+    "country": {
+      "type": "string",
+      "description": "Estimated country from IP"
+    }
+  },
+  "required": [
+    "recovery_access_id",
+    "master_admin_user_id",
+    "action",
+    "was_successful"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "data.master_admin_user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "data.master_admin_user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "user_condition": {
+        "role": "master_admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "master_admin"
+      }
+    }
+  }
+}

@@ -1,0 +1,110 @@
+{
+  "name": "HeroBannerImpression",
+  "type": "object",
+  "properties": {
+    "banner_id": {
+      "type": "string",
+      "description": "Reference to HeroBanner"
+    },
+    "banner_title": {
+      "type": "string"
+    },
+    "banner_category": {
+      "type": "string"
+    },
+    "user_id": {
+      "type": "string",
+      "description": "User who interacted (null for anonymous)"
+    },
+    "user_role": {
+      "type": "string"
+    },
+    "interaction_type": {
+      "type": "string",
+      "enum": [
+        "impression",
+        "click",
+        "play",
+        "profile_visit",
+        "follow",
+        "support",
+        "playlist_add",
+        "share",
+        "ticket_click",
+        "merch_click",
+        "community_join",
+        "referral_conversion"
+      ],
+      "description": "Type of interaction tracked"
+    },
+    "artist_profile_id": {
+      "type": "string"
+    },
+    "session_id": {
+      "type": "string",
+      "description": "Browser session identifier for deduplication"
+    }
+  },
+  "required": [
+    "banner_id",
+    "interaction_type"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    }
+  }
+}

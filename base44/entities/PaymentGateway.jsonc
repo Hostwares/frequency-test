@@ -1,0 +1,157 @@
+{
+  "name": "PaymentGateway",
+  "type": "object",
+  "properties": {
+    "gateway_name": {
+      "type": "string",
+      "enum": [
+        "base44_payments",
+        "stripe",
+        "paypal",
+        "cash_app",
+        "chime",
+        "apple_pay",
+        "google_pay"
+      ],
+      "description": "Payment processor identifier"
+    },
+    "display_name": {
+      "type": "string",
+      "description": "Display name shown to users at checkout"
+    },
+    "is_enabled": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether this gateway is active for checkout"
+    },
+    "is_primary": {
+      "type": "boolean",
+      "default": false,
+      "description": "Primary gateway used for default checkout flow"
+    },
+    "supports_subscriptions": {
+      "type": "boolean",
+      "default": false
+    },
+    "supports_one_time": {
+      "type": "boolean",
+      "default": true
+    },
+    "supports_mobile": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether this is a mobile wallet (Apple Pay, Google Pay)"
+    },
+    "supported_payment_types": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "subscription",
+          "artist_support",
+          "donation",
+          "merch",
+          "tickets"
+        ]
+      },
+      "description": "Which payment flows this gateway supports"
+    },
+    "api_key_secret_name": {
+      "type": "string",
+      "description": "Name of the environment variable holding the API key"
+    },
+    "webhook_secret_name": {
+      "type": "string",
+      "description": "Name of the webhook signing secret env var"
+    },
+    "min_transaction_amount": {
+      "type": "number",
+      "default": 0.5,
+      "description": "Minimum transaction amount in USD"
+    },
+    "processing_fee_percent": {
+      "type": "number",
+      "description": "Processor's fee percentage"
+    },
+    "processing_fee_fixed": {
+      "type": "number",
+      "default": 0,
+      "description": "Processor's fixed fee per transaction"
+    },
+    "sort_order": {
+      "type": "number",
+      "default": 0
+    },
+    "icon_color": {
+      "type": "string",
+      "description": "Hex color for the gateway icon"
+    },
+    "config_notes": {
+      "type": "string",
+      "description": "Admin notes about configuration status"
+    }
+  },
+  "required": [
+    "gateway_name",
+    "display_name",
+    "is_enabled"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    }
+  }
+}

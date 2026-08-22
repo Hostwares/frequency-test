@@ -1,0 +1,196 @@
+{
+  "name": "DMCANotice",
+  "type": "object",
+  "properties": {
+    "complainant_name": {
+      "type": "string",
+      "description": "Name of the person filing the DMCA notice"
+    },
+    "complainant_email": {
+      "type": "string",
+      "description": "Email of the complainant"
+    },
+    "complainant_company": {
+      "type": "string",
+      "description": "Company or organization (if applicable)"
+    },
+    "complainant_user_id": {
+      "type": "string",
+      "description": "User ID if they are a platform user"
+    },
+    "infringing_song_id": {
+      "type": "string",
+      "description": "Song ID alleged to be infringing"
+    },
+    "infringing_song_title": {
+      "type": "string"
+    },
+    "infringing_artist_name": {
+      "type": "string"
+    },
+    "original_work_title": {
+      "type": "string",
+      "description": "Title of the original copyrighted work"
+    },
+    "original_work_url": {
+      "type": "string",
+      "description": "URL where the original work can be found"
+    },
+    "original_work_registration": {
+      "type": "string",
+      "description": "Copyright registration number (if available)"
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 5000,
+      "description": "Detailed description of the infringement"
+    },
+    "evidence_urls": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "URLs to evidence"
+    },
+    "good_faith_statement": {
+      "type": "boolean",
+      "default": false,
+      "description": "Complainant affirms good faith belief that use is unauthorized"
+    },
+    "accuracy_statement": {
+      "type": "boolean",
+      "default": false,
+      "description": "Complainant affirms accuracy under penalty of perjury"
+    },
+    "signature": {
+      "type": "string",
+      "description": "Electronic signature (typed name)"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "received",
+        "under_review",
+        "notice_sent_to_artist",
+        "content_removed",
+        "counter_notice_filed",
+        "restored",
+        "dismissed",
+        "escalated"
+      ],
+      "default": "received"
+    },
+    "priority": {
+      "type": "string",
+      "enum": [
+        "low",
+        "medium",
+        "high",
+        "urgent"
+      ],
+      "default": "high"
+    },
+    "reviewed_by": {
+      "type": "string"
+    },
+    "resolution_notes": {
+      "type": "string"
+    },
+    "content_removed_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "notice_sent_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "counter_notice_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "resolved_date": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "complainant_name",
+    "complainant_email",
+    "infringing_song_title",
+    "original_work_title",
+    "description",
+    "good_faith_statement",
+    "accuracy_statement",
+    "signature"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    }
+  }
+}

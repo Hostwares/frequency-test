@@ -1,0 +1,164 @@
+{
+  "name": "DiscoveryPartner",
+  "type": "object",
+  "properties": {
+    "user_id": {
+      "type": "string",
+      "description": "Reference to User entity"
+    },
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "partner_type": {
+      "type": "string",
+      "enum": [
+        "music_blog",
+        "independent_curator",
+        "influencer",
+        "radio_host",
+        "podcast_host",
+        "music_reviewer",
+        "veteran_organization",
+        "festival_organizer",
+        "college_music_program",
+        "local_music_organization",
+        "music_journalist",
+        "community_music_leader",
+        "other"
+      ],
+      "default": "independent_curator"
+    },
+    "website": {
+      "type": "string"
+    },
+    "social_links": {
+      "type": "object",
+      "properties": {
+        "instagram": {
+          "type": "string"
+        },
+        "twitter": {
+          "type": "string"
+        },
+        "youtube": {
+          "type": "string"
+        },
+        "tiktok": {
+          "type": "string"
+        }
+      }
+    },
+    "location": {
+      "type": "string"
+    },
+    "genres_covered": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "frequencies_covered": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "profile_image": {
+      "type": "string"
+    },
+    "cover_image": {
+      "type": "string"
+    },
+    "is_verified": {
+      "type": "boolean",
+      "default": false
+    },
+    "verification_status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "under_review",
+        "verified",
+        "rejected"
+      ],
+      "default": "pending"
+    },
+    "follower_count": {
+      "type": "number",
+      "default": 0
+    },
+    "reputation_score": {
+      "type": "number",
+      "default": 0
+    },
+    "discovery_success_rate": {
+      "type": "number",
+      "default": 0
+    },
+    "artists_discovered": {
+      "type": "number",
+      "default": 0
+    },
+    "artists_supported": {
+      "type": "number",
+      "default": 0
+    },
+    "community_endorsements": {
+      "type": "number",
+      "default": 0
+    },
+    "scout_score": {
+      "type": "number",
+      "default": 0
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "required": [
+    "user_id",
+    "name"
+  ],
+  "rls": {
+    "read": {},
+    "create": {},
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    }
+  }
+}

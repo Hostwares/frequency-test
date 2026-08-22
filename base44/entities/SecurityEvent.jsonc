@@ -1,0 +1,148 @@
+{
+  "name": "SecurityEvent",
+  "type": "object",
+  "properties": {
+    "event_type": {
+      "type": "string",
+      "enum": [
+        "login_success",
+        "login_failed",
+        "login_alert",
+        "brute_force_attempt",
+        "suspicious_activity",
+        "fraud_flag",
+        "account_locked",
+        "password_change",
+        "mfa_challenge",
+        "session_expired",
+        "unauthorized_access",
+        "rate_limit_exceeded",
+        "sql_injection_blocked",
+        "xss_attempt_blocked",
+        "csrf_blocked",
+        "payment_fraud",
+        "chargeback_filed",
+        "account_takeover_attempt"
+      ],
+      "description": "Type of security event"
+    },
+    "user_id": {
+      "type": "string",
+      "description": "User associated with the event (if known)"
+    },
+    "user_email": {
+      "type": "string"
+    },
+    "ip_address": {
+      "type": "string",
+      "description": "Source IP address"
+    },
+    "user_agent": {
+      "type": "string"
+    },
+    "severity": {
+      "type": "string",
+      "enum": [
+        "info",
+        "warning",
+        "critical"
+      ],
+      "default": "info"
+    },
+    "description": {
+      "type": "string",
+      "description": "Human-readable event description"
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Additional event context (attempt count, blocked payload, etc.)"
+    },
+    "is_resolved": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether a critical/warning event has been resolved by an admin"
+    },
+    "resolved_by": {
+      "type": "string",
+      "description": "Admin user ID who resolved the event"
+    },
+    "resolved_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "resolution_notes": {
+      "type": "string"
+    },
+    "country": {
+      "type": "string",
+      "description": "Estimated country from IP"
+    },
+    "device_fingerprint": {
+      "type": "string",
+      "description": "Device fingerprint hash for tracking repeat offenders"
+    }
+  },
+  "required": [
+    "event_type",
+    "severity",
+    "description"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    }
+  }
+}

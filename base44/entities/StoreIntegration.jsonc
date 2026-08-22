@@ -1,0 +1,155 @@
+{
+  "name": "StoreIntegration",
+  "type": "object",
+  "properties": {
+    "artist_profile_id": {
+      "type": "string",
+      "description": "Artist who owns this store integration"
+    },
+    "artist_name": {
+      "type": "string"
+    },
+    "platform": {
+      "type": "string",
+      "enum": [
+        "shopify",
+        "printify",
+        "printful",
+        "etsy",
+        "bandcamp",
+        "bigcartel",
+        "custom",
+        "direct"
+      ],
+      "description": "E-commerce platform integrated"
+    },
+    "store_name": {
+      "type": "string",
+      "description": "Display name for the store"
+    },
+    "store_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "External store URL"
+    },
+    "api_key": {
+      "type": "string",
+      "description": "API key for platform integration (encrypted)"
+    },
+    "shop_domain": {
+      "type": "string",
+      "description": "Shop domain (e.g. my-store.myshopify.com)"
+    },
+    "webhook_secret": {
+      "type": "string",
+      "description": "Webhook secret for order sync verification"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true
+    },
+    "is_verified": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether the connection has been verified"
+    },
+    "sync_products": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether to auto-sync products from external store"
+    },
+    "sync_orders": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether to auto-sync orders from external store"
+    },
+    "last_sync_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "product_count": {
+      "type": "number",
+      "default": 0,
+      "description": "Number of products synced"
+    },
+    "fulfillment_mode": {
+      "type": "string",
+      "enum": [
+        "platform_handled",
+        "artist_ships",
+        "print_on_demand",
+        "digital_only"
+      ],
+      "default": "platform_handled",
+      "description": "How orders are fulfilled"
+    },
+    "revenue_share_percentage": {
+      "type": "number",
+      "default": 85,
+      "description": "Percentage artist receives from external store sales"
+    }
+  },
+  "required": [
+    "artist_profile_id",
+    "platform",
+    "store_name"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    }
+  }
+}

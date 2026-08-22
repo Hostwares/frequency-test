@@ -1,0 +1,407 @@
+{
+  "name": "RadioStation",
+  "type": "object",
+  "properties": {
+    "applicant_user_id": {
+      "type": "string",
+      "description": "User who submitted this radio application"
+    },
+    "official_station_name": {
+      "type": "string",
+      "description": "Official licensed or public station name"
+    },
+    "official_station_identifier": {
+      "type": "string",
+      "description": "Radio Call Sign or Official Station Identifier \u2014 FCC call sign, national call sign, licensed station name, network identifier, or official internet station name. Not a number-based call system since many international stations do not use one."
+    },
+    "public_handle": {
+      "type": "string",
+      "description": "Public radio handle in ^stationname format. Unique, approved during verification, protected from impersonation. Pending applications use a temporary internal identifier until approved.",
+      "pattern": "^[a-zA-Z0-9_]{2,30}$"
+    },
+    "station_type": {
+      "type": "string",
+      "enum": [
+        "terrestrial_radio",
+        "internet_radio",
+        "satellite_digital_network",
+        "syndicated_program",
+        "independent_programmer"
+      ],
+      "description": "Radio account type selected at application: terrestrial (AM/FM/shortwave/college/public/commercial/community), internet-only, satellite/digital network, syndicated program, or independent programmer"
+    },
+    "terrestrial_subtype": {
+      "type": "string",
+      "enum": [
+        "am",
+        "fm",
+        "shortwave",
+        "college",
+        "public",
+        "commercial",
+        "community"
+      ],
+      "description": "Subtype when station_type is terrestrial_radio"
+    },
+    "frequency": {
+      "type": "string",
+      "description": "Broadcast frequency (e.g. 101.5)"
+    },
+    "band": {
+      "type": "string",
+      "enum": [
+        "AM",
+        "FM",
+        "digital",
+        "satellite",
+        "internet",
+        "shortwave"
+      ]
+    },
+    "country": {
+      "type": "string"
+    },
+    "region": {
+      "type": "string",
+      "description": "State, province, or region"
+    },
+    "city": {
+      "type": "string",
+      "description": "City or market"
+    },
+    "market": {
+      "type": "string"
+    },
+    "time_zone": {
+      "type": "string"
+    },
+    "language": {
+      "type": "string"
+    },
+    "genres_programmed": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "station_description": {
+      "type": "string"
+    },
+    "website": {
+      "type": "string",
+      "description": "Official station website URL"
+    },
+    "stream_url": {
+      "type": "string",
+      "description": "Active live-stream URL"
+    },
+    "schedule_url": {
+      "type": "string",
+      "description": "Public schedule page URL"
+    },
+    "social_links": {
+      "type": "object",
+      "properties": {
+        "facebook": {
+          "type": "string"
+        },
+        "twitter": {
+          "type": "string"
+        },
+        "instagram": {
+          "type": "string"
+        },
+        "linkedin": {
+          "type": "string"
+        }
+      }
+    },
+    "logo": {
+      "type": "string"
+    },
+    "applicant_full_name": {
+      "type": "string",
+      "description": "Applicant's full legal name"
+    },
+    "applicant_title": {
+      "type": "string",
+      "description": "Professional title"
+    },
+    "applicant_station_role": {
+      "type": "string",
+      "enum": [
+        "program_director",
+        "music_director",
+        "assistant_music_director",
+        "specialty_show_host",
+        "digital_programmer",
+        "playlist_director",
+        "station_manager",
+        "content_director",
+        "on_air_personality",
+        "independent_curator"
+      ]
+    },
+    "applicant_work_email": {
+      "type": "string",
+      "description": "Official station-domain work email preferred"
+    },
+    "applicant_work_phone": {
+      "type": "string"
+    },
+    "applicant_department": {
+      "type": "string"
+    },
+    "applicant_manager_name": {
+      "type": "string"
+    },
+    "applicant_linkedin": {
+      "type": "string",
+      "description": "LinkedIn or professional page URL when available"
+    },
+    "license_holder": {
+      "type": "string",
+      "description": "License holder or operator"
+    },
+    "parent_company": {
+      "type": "string"
+    },
+    "network_affiliation": {
+      "type": "string"
+    },
+    "ownership_type": {
+      "type": "string"
+    },
+    "government_license_number": {
+      "type": "string",
+      "description": "Government license number when applicable"
+    },
+    "regulator": {
+      "type": "string",
+      "description": "Broadcasting regulator (e.g. FCC, CRTC, Ofcom, ACMA)"
+    },
+    "license_expiration_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "verification_documents": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "document_type": {
+            "type": "string",
+            "enum": [
+              "station_authorization_letter",
+              "employee_identification",
+              "business_registration",
+              "broadcasting_license",
+              "manager_letter",
+              "staff_directory_screenshot",
+              "official_email_confirmation",
+              "other"
+            ]
+          },
+          "file_url": {
+            "type": "string"
+          },
+          "notes": {
+            "type": "string"
+          }
+        }
+      },
+      "default": [],
+      "description": "Sensitive verification documents stored securely, never shown publicly."
+    },
+    "verification_status": {
+      "type": "string",
+      "enum": [
+        "application_started",
+        "application_submitted",
+        "email_verification_pending",
+        "ai_review_in_progress",
+        "manual_review_required",
+        "additional_information_requested",
+        "verified",
+        "verified_with_restrictions",
+        "rejected",
+        "suspended",
+        "verification_expired",
+        "appeal_pending"
+      ],
+      "default": "application_started",
+      "description": "Current verification lifecycle status. Public verification badge shown only for verified statuses."
+    },
+    "verification_type": {
+      "type": "string",
+      "enum": [
+        "verified_terrestrial_station",
+        "verified_internet_station",
+        "verified_radio_network",
+        "verified_radio_programmer",
+        "none"
+      ],
+      "default": "none",
+      "description": "Badge type displayed on public profile when verified."
+    },
+    "verification_score": {
+      "type": "number",
+      "default": 0,
+      "description": "AI confidence score 0-100. 85-100 strong, 70-84 likely legitimate manual review, 50-69 insufficient, below 50 high risk. No account fully verified solely by score \u2014 human admin must approve."
+    },
+    "risk_level": {
+      "type": "string",
+      "enum": [
+        "low",
+        "medium",
+        "high",
+        "critical"
+      ],
+      "default": "medium"
+    },
+    "verification_flags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": [],
+      "description": "AI-generated flags explaining suspicious signals."
+    },
+    "ai_notes": {
+      "type": "string",
+      "description": "AI verification notes explaining the score and flags."
+    },
+    "verified_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "reverification_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Scheduled full reverification (12 months). Public-record checks every 90 days."
+    },
+    "last_public_record_check": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "assigned_reviewer_id": {
+      "type": "string"
+    },
+    "assigned_reviewer_name": {
+      "type": "string"
+    },
+    "application_submitted_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "decision_reason": {
+      "type": "string"
+    },
+    "requested_information": {
+      "type": "string",
+      "description": "Information requested from applicant during additional_information_requested status."
+    },
+    "appeal_status": {
+      "type": "string",
+      "enum": [
+        "none",
+        "submitted",
+        "under_review",
+        "granted",
+        "denied"
+      ],
+      "default": "none"
+    },
+    "radio_programmer_id": {
+      "type": "string",
+      "description": "Reference to the RadioProgrammer seat created for the applicant once verified."
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true
+    },
+    "streaming_active": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether AI detected an active live stream."
+    }
+  },
+  "required": [
+    "applicant_user_id",
+    "official_station_name",
+    "station_type"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "data.applicant_user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "data.applicant_user_id": "{{user.id}}"
+        },
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "data.applicant_user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "data.applicant_user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    }
+  }
+}

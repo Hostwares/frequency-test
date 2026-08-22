@@ -1,0 +1,274 @@
+{
+  "name": "HeroBanner",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Internal banner title for admin reference"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "mainstream_first",
+        "heard_first",
+        "rising",
+        "featured_artist",
+        "new_release",
+        "discovery_partner_spotlight",
+        "community_spotlight",
+        "radio_spotlight",
+        "live_event",
+        "merchandise",
+        "ticket_sale",
+        "editorial_collection",
+        "promotional_campaign"
+      ],
+      "description": "Banner category determining content type and styling"
+    },
+    "category_label": {
+      "type": "string",
+      "description": "Display label for the category badge (e.g. 'Mainstream First™', 'Heard First')"
+    },
+    "headline": {
+      "type": "string",
+      "description": "Large display headline shown on the banner"
+    },
+    "subheadline": {
+      "type": "string",
+      "description": "Secondary text below the headline"
+    },
+    "cta_text": {
+      "type": "string",
+      "default": "Learn More",
+      "description": "Call-to-action button label"
+    },
+    "cta_action": {
+      "type": "string",
+      "enum": [
+        "play_now",
+        "view_artist",
+        "support_artist",
+        "view_community",
+        "view_event",
+        "shop_merch",
+        "buy_tickets",
+        "learn_more",
+        "join_now"
+      ],
+      "description": "Action type for the CTA button"
+    },
+    "cta_url": {
+      "type": "string",
+      "description": "Internal route or external URL the CTA navigates to"
+    },
+    "artist_profile_id": {
+      "type": "string",
+      "description": "Linked artist for targeting and analytics"
+    },
+    "artist_name": {
+      "type": "string"
+    },
+    "artist_handle": {
+      "type": "string"
+    },
+    "genre": {
+      "type": "string",
+      "description": "Primary genre for diversity rules and targeting"
+    },
+    "song_id": {
+      "type": "string"
+    },
+    "event_id": {
+      "type": "string"
+    },
+    "community_id": {
+      "type": "string"
+    },
+    "product_id": {
+      "type": "string"
+    },
+    "desktop_artwork": {
+      "type": "string",
+      "description": "High-resolution artwork URL for desktop display"
+    },
+    "mobile_artwork": {
+      "type": "string",
+      "description": "High-resolution artwork URL for mobile display"
+    },
+    "artist_image": {
+      "type": "string",
+      "description": "Artist hero image overlaid on the banner"
+    },
+    "start_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the banner becomes active"
+    },
+    "end_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the banner expires"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true
+    },
+    "is_pinned": {
+      "type": "boolean",
+      "default": false,
+      "description": "Pinned banners always appear first regardless of score"
+    },
+    "priority": {
+      "type": "number",
+      "default": 0,
+      "description": "Manual priority override (higher = earlier in rotation)"
+    },
+    "banner_type": {
+      "type": "string",
+      "enum": [
+        "dynamic_artist",
+        "editorial",
+        "community_event",
+        "sponsored_campaign"
+      ],
+      "default": "editorial",
+      "description": "Banner type for rotation distribution"
+    },
+    "target_user_types": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "fan",
+          "artist",
+          "discovery_partner",
+          "radio_programmer",
+          "community_manager",
+          "admin",
+          "all"
+        ]
+      },
+      "default": [
+        "all"
+      ],
+      "description": "Which user types should see this banner"
+    },
+    "target_genres": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Genres to target (empty = all genres)"
+    },
+    "target_regions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Geographic regions to target (empty = all regions)"
+    },
+    "hero_banner_score": {
+      "type": "number",
+      "default": 0,
+      "description": "Calculated score from supporters, growth, votes, etc."
+    },
+    "impression_count": {
+      "type": "number",
+      "default": 0
+    },
+    "click_count": {
+      "type": "number",
+      "default": 0
+    },
+    "play_count": {
+      "type": "number",
+      "default": 0
+    },
+    "profile_visit_count": {
+      "type": "number",
+      "default": 0
+    },
+    "new_follower_count": {
+      "type": "number",
+      "default": 0
+    },
+    "new_supporter_count": {
+      "type": "number",
+      "default": 0
+    },
+    "playlist_add_count": {
+      "type": "number",
+      "default": 0
+    },
+    "share_count": {
+      "type": "number",
+      "default": 0
+    },
+    "ticket_sale_count": {
+      "type": "number",
+      "default": 0
+    },
+    "merch_sale_count": {
+      "type": "number",
+      "default": 0
+    },
+    "community_join_count": {
+      "type": "number",
+      "default": 0
+    },
+    "referral_conversion_count": {
+      "type": "number",
+      "default": 0
+    },
+    "created_by_user_id": {
+      "type": "string"
+    },
+    "created_by_name": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "title",
+    "category",
+    "headline",
+    "cta_action"
+  ],
+  "rls": {
+    "read": {},
+    "create": {},
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    }
+  }
+}

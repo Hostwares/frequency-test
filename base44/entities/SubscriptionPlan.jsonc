@@ -1,0 +1,180 @@
+{
+  "name": "SubscriptionPlan",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Plan name (Free, Supporter, Premium Supporter, Champion, Founding Supporter, beta tiers)"
+    },
+    "plan_code": {
+      "type": "string",
+      "enum": [
+        "free",
+        "supporter",
+        "premium_supporter",
+        "champion",
+        "founding_supporter",
+        "artist_free",
+        "frequency_free_beta",
+        "founding_supporter_beta",
+        "founding_premium_beta",
+        "founding_champion_beta",
+        "artist_free_beta",
+        "artist_pro_beta"
+      ],
+      "description": "Internal plan identifier"
+    },
+    "target_audience": {
+      "type": "string",
+      "enum": [
+        "fan",
+        "artist"
+      ],
+      "default": "fan"
+    },
+    "monthly_price": {
+      "type": "number",
+      "default": 0
+    },
+    "annual_price": {
+      "type": "number",
+      "default": 0,
+      "description": "Annual price (about 2 months free)"
+    },
+    "is_founding": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether this is a Founding Member plan with locked pricing"
+    },
+    "is_beta": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether this plan is a beta-period tier"
+    },
+    "support_allocation": {
+      "type": "number",
+      "default": 0,
+      "description": "Monthly amount allocated to artist support"
+    },
+    "max_supported_artists": {
+      "type": "number",
+      "default": 0,
+      "description": "Maximum number of artists this plan supports monthly (0 = unlimited)"
+    },
+    "platform_operations_fee": {
+      "type": "number",
+      "default": 2.5,
+      "description": "Portion that goes to platform operations"
+    },
+    "description": {
+      "type": "string"
+    },
+    "features": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of features included in this plan"
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Limitations for free tier"
+    },
+    "social_amplifier_posts_per_week": {
+      "type": "number",
+      "default": 0,
+      "description": "Maximum Social Amplifier posts per week for this tier. 0 = no access to Social Amplifier. Founding Premium Beta = 2, Founding Champion Beta = 3, all other tiers = 0. Feature is NOT yet implemented \u2014 requires full scoping (target social platform, post content type, scheduling rules) before build."
+    },
+    "signal_point_multiplier": {
+      "type": "number",
+      "default": 1.0,
+      "description": "Multiplier applied to a subscriber's Signal Points earnings for this tier. Founding Supporter Beta = 1.0 (standard), Founding Premium Beta = 1.5 (premium), Founding Champion Beta = 2.0 (highest). All other tiers = 1.0 (baseline). Signal Points feature is NOT yet implemented \u2014 requires full scoping (what activities earn points, point values, earning frequency, redemption options) before build."
+    },
+    "signal_points_requires_scoping": {
+      "type": "boolean",
+      "default": true,
+      "description": "FLAG: The Signal Points system is NOT yet fully scoped. Before implementation, full scoping is required including: what subscriber activities earn Signal Points, base point values per activity, earning frequency and caps, how the multiplier is applied, redemption/decay rules, and UI for points tracking. Do not implement until this flag is set to false."
+    },
+    "early_access_tier": {
+      "type": "string",
+      "enum": [
+        "none",
+        "standard",
+        "priority"
+      ],
+      "default": "none",
+      "description": "Early Access / New-Artist-Drop Queue tier for this plan. 'none' = no early access (Founding Supporter Beta). 'standard' = standard early access to newly-onboarded artists (Founding Premium Beta). 'priority' = priority-ordered early access, subscribers are at the front of the drop queue (Founding Champion Beta). Feature is NOT yet implemented \u2014 requires full scoping (drop frequency, how artists enter the queue, notification rules, access window duration) before build."
+    },
+    "early_access_requires_scoping": {
+      "type": "boolean",
+      "default": true,
+      "description": "FLAG: The Early Access / New-Artist-Drop Queue is NOT yet fully scoped. Before implementation, full scoping is required including: what triggers a new-artist drop, drop frequency and cadence, how artists enter and exit the queue, how priority ordering works for Champion-tier subscribers, notification rules, access window duration, and what access actually grants (viewing, following, supporting early). Do not implement until this flag is set to false."
+    },
+    "badge_color": {
+      "type": "string",
+      "description": "Hex color for plan badge"
+    },
+    "tier_badge_url": {
+      "type": "string",
+      "description": "URL to the tier badge image asset displayed on subscriber profiles. Set per tier (e.g. Beta Supporter, Founding Premium Beta, Founding Patron Beta). When null, a styled fallback badge renders using the plan name and badge_color."
+    },
+    "sort_order": {
+      "type": "number",
+      "default": 0
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true
+    },
+    "is_popular": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether to highlight as most popular"
+    }
+  },
+  "required": [
+    "name",
+    "plan_code"
+  ],
+  "rls": {
+    "read": {},
+    "create": {},
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    }
+  }
+}

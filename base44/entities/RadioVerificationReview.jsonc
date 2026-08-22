@@ -1,0 +1,156 @@
+{
+  "name": "RadioVerificationReview",
+  "type": "object",
+  "properties": {
+    "station_id": {
+      "type": "string",
+      "description": "Reference to RadioStation application under review."
+    },
+    "application_id": {
+      "type": "string",
+      "description": "Same as station_id; the application identifier."
+    },
+    "ai_score": {
+      "type": "number",
+      "default": 0,
+      "description": "AI-generated verification confidence score 0-100."
+    },
+    "risk_level": {
+      "type": "string",
+      "enum": [
+        "low",
+        "medium",
+        "high",
+        "critical"
+      ],
+      "default": "medium"
+    },
+    "flags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": [],
+      "description": "AI fraud and impersonation flags with explanations."
+    },
+    "ai_summary": {
+      "type": "string",
+      "description": "AI narrative summary of the verification assessment."
+    },
+    "assigned_reviewer_id": {
+      "type": "string"
+    },
+    "assigned_reviewer_name": {
+      "type": "string"
+    },
+    "decision": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "approved",
+        "rejected",
+        "more_info",
+        "restricted",
+        "suspended"
+      ],
+      "default": "pending",
+      "description": "Final human review decision. Human admin has final approval authority."
+    },
+    "decision_reason": {
+      "type": "string"
+    },
+    "requested_information": {
+      "type": "string",
+      "description": "Information requested from the applicant when decision is more_info."
+    },
+    "review_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "appeal_status": {
+      "type": "string",
+      "enum": [
+        "none",
+        "submitted",
+        "under_review",
+        "granted",
+        "denied"
+      ],
+      "default": "none"
+    },
+    "appeal_notes": {
+      "type": "string"
+    },
+    "review_stage": {
+      "type": "string",
+      "enum": [
+        "ai_review",
+        "manual_review",
+        "reverification",
+        "appeal"
+      ],
+      "default": "ai_review"
+    }
+  },
+  "required": [
+    "station_id"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    }
+  }
+}

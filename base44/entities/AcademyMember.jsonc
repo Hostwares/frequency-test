@@ -1,0 +1,323 @@
+{
+  "name": "AcademyMember",
+  "type": "object",
+  "properties": {
+    "user_id": {
+      "type": "string",
+      "description": "Reference to User entity"
+    },
+    "applicant_name": {
+      "type": "string",
+      "description": "Full name of the applicant"
+    },
+    "applicant_email": {
+      "type": "string",
+      "description": "Email of the applicant"
+    },
+    "applicant_type": {
+      "type": "string",
+      "enum": [
+        "verified_artist",
+        "discovery_partner",
+        "radio_programmer",
+        "music_journalist",
+        "community_manager",
+        "music_educator",
+        "producer",
+        "songwriter",
+        "engineer",
+        "entertainment_attorney",
+        "venue_owner",
+        "festival_organizer",
+        "industry_professional",
+        "community_contributor",
+        "fan_representative"
+      ],
+      "description": "Category of eligibility the applicant falls under"
+    },
+    "professional_background": {
+      "type": "string",
+      "description": "Applicant's professional background"
+    },
+    "music_industry_experience": {
+      "type": "string",
+      "description": "Years and nature of music industry experience"
+    },
+    "areas_of_expertise": {
+      "type": "string",
+      "description": "Specific areas of expertise"
+    },
+    "familiar_genres": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Genres the applicant is most familiar with"
+    },
+    "community_involvement": {
+      "type": "string",
+      "description": "Description of community involvement on the platform"
+    },
+    "artist_support_experience": {
+      "type": "string",
+      "description": "Experience supporting artists"
+    },
+    "why_fair_voter": {
+      "type": "string",
+      "description": "Why the applicant would make a fair voting member"
+    },
+    "bio": {
+      "type": "string",
+      "description": "Biography"
+    },
+    "resume_url": {
+      "type": "string",
+      "description": "Link to resume or CV (optional)"
+    },
+    "website": {
+      "type": "string",
+      "description": "Professional website URL"
+    },
+    "portfolio_url": {
+      "type": "string",
+      "description": "Portfolio URL"
+    },
+    "publication_links": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Publication or media links"
+    },
+    "industry_references": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Industry references (optional)"
+    },
+    "confidentiality_agreed": {
+      "type": "boolean",
+      "default": false,
+      "description": "Applicant agreed to confidentiality requirements"
+    },
+    "code_of_ethics_agreed": {
+      "type": "boolean",
+      "default": false,
+      "description": "Applicant agreed to the Academy Code of Ethics"
+    },
+    "application_status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "under_review",
+        "approved",
+        "rejected",
+        "suspended",
+        "removed"
+      ],
+      "default": "pending",
+      "description": "Status of the application"
+    },
+    "applied_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "reviewed_by": {
+      "type": "string",
+      "description": "Admin who reviewed the application"
+    },
+    "reviewed_by_name": {
+      "type": "string"
+    },
+    "reviewed_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "review_notes": {
+      "type": "string",
+      "description": "Internal committee notes"
+    },
+    "rejection_reason": {
+      "type": "string"
+    },
+    "membership_status": {
+      "type": "string",
+      "enum": [
+        "none",
+        "active",
+        "suspended",
+        "removed"
+      ],
+      "default": "none",
+      "description": "Active membership status (separate from application)"
+    },
+    "member_since_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the member was approved"
+    },
+    "is_voting_council": {
+      "type": "boolean",
+      "default": false,
+      "description": "Selected for the Final Voting Council this cycle"
+    },
+    "voting_council_year": {
+      "type": "number",
+      "description": "Year selected for the Final Voting Council"
+    },
+    "assigned_categories": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Award categories assigned to this member for voting"
+    },
+    "conflict_of_interest_disclosures": {
+      "type": "string",
+      "description": "Disclosed conflicts of interest"
+    },
+    "previous_voting_participation": {
+      "type": "number",
+      "default": 0,
+      "description": "Number of previous voting cycles participated in"
+    },
+    "academy_announcements_read": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": [],
+      "description": "IDs of announcements the member has acknowledged"
+    },
+    "community_impact_score": {
+      "type": "number",
+      "default": 0,
+      "description": "Aggregate community impact score based on contributions, votes, and engagement"
+    },
+    "articles_published": {
+      "type": "number",
+      "default": 0,
+      "description": "Number of editorial articles published by this member"
+    },
+    "votes_cast": {
+      "type": "number",
+      "default": 0,
+      "description": "Total votes cast across all awards cycles"
+    },
+    "votes_current_cycle": {
+      "type": "number",
+      "default": 0,
+      "description": "Votes cast in the current awards cycle"
+    },
+    "community_contributions": {
+      "type": "number",
+      "default": 0,
+      "description": "Number of community contributions (spotlights, recommendations, polls, etc.)"
+    },
+    "artists_supported": {
+      "type": "number",
+      "default": 0,
+      "description": "Number of artists this member actively supports"
+    },
+    "events_attended": {
+      "type": "number",
+      "default": 0,
+      "description": "Number of platform events attended"
+    },
+    "last_active_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Last time the member was active on the platform"
+    },
+    "governor_tier": {
+      "type": "string",
+      "enum": [
+        "founding",
+        "senior",
+        "member"
+      ],
+      "default": "member",
+      "description": "Governor tier — founding members were among the first 100, senior members have 3+ cycles"
+    }
+  },
+  "required": [
+    "user_id",
+    "applicant_name",
+    "applicant_email",
+    "applicant_type"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "data.user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "data.user_id": "{{user.id}}"
+        },
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "data.user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "data.user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    }
+  }
+}

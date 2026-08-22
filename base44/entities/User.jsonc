@@ -1,0 +1,312 @@
+{
+  "name": "User",
+  "type": "object",
+  "properties": {
+    "role": {
+      "type": "string",
+      "enum": [
+        "fan",
+        "artist",
+        "frequency_community",
+        "discovery_partner",
+        "radio_programmer",
+        "business_partner",
+        "professional_consultant",
+        "community_manager",
+        "admin",
+        "master_admin",
+        "admin_partner"
+      ],
+      "default": "fan",
+      "description": "Primary public role \u2014 the user's main public identity. Stored separately from subscription_entitlement so role (who you are) is independent from entitlement (what you pay for). Each role is independently assignable and independently verifiable."
+    },
+    "additional_roles": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "fan",
+          "artist",
+          "frequency_community",
+          "discovery_partner",
+          "radio_programmer",
+          "business_partner",
+          "professional_consultant",
+          "community_manager"
+        ]
+      },
+      "default": [],
+      "description": "Other approved public roles held under one account (one secure login, multiple approved roles). Each role is independently assignable and independently verifiable. A user who is both an artist and a radio programmer does NOT need separate logins."
+    },
+    "admin_roles": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "master_admin",
+          "co_owner",
+          "operations_admin",
+          "editorial_admin",
+          "artist_relations_admin",
+          "fan_support_admin",
+          "partnership_admin",
+          "finance_admin",
+          "marketing_admin",
+          "view_only_admin"
+        ]
+      },
+      "default": [],
+      "description": "Internal administrative roles assigned to this user. Organizational labels; actual permissions live in admin_permissions."
+    },
+    "admin_permissions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": [],
+      "description": "Granular administrative permission keys granted to this user. Granted separately from roles and recorded in the audit log. master_admin implicitly holds all."
+    },
+    "admin_permissions_updated_by_id": {
+      "type": "string",
+      "description": "User who last assigned/modified admin permissions."
+    },
+    "admin_permissions_updated_by_name": {
+      "type": "string"
+    },
+    "admin_permissions_updated_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "subscription_entitlement": {
+      "type": "object",
+      "description": "Denormalized snapshot of the user's active subscription entitlement, synced from UserSubscription. Separates the user's role (identity) from their subscription tier (what they pay for). Updated automatically on subscription activation, cancellation, and expiration.",
+      "properties": {
+        "plan_code": {
+          "type": "string",
+          "description": "Active subscription plan code (e.g. founding_supporter_beta)"
+        },
+        "plan_name": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "pending",
+            "active",
+            "canceled",
+            "expired",
+            "past_due",
+            "trialing"
+          ],
+          "description": "Current subscription status"
+        },
+        "billing_cycle": {
+          "type": "string",
+          "enum": [
+            "monthly",
+            "annual"
+          ]
+        },
+        "monthly_price": {
+          "type": "number"
+        },
+        "is_founding_member": {
+          "type": "boolean"
+        },
+        "subscription_id": {
+          "type": "string",
+          "description": "External recurring subscription ID from the payment provider"
+        },
+        "next_billing_date": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "max_funded_networks": {
+          "type": "number",
+          "description": "Active funded network limit for this tier"
+        },
+        "max_distinct_artists": {
+          "type": "number",
+          "description": "Maximum distinct supported artists across all funded networks"
+        },
+        "allocation_tier": {
+          "type": "string",
+          "enum": [
+            "standard",
+            "advanced",
+            "advanced_plus"
+          ]
+        },
+        "last_synced_date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When this entitlement snapshot was last synced from UserSubscription"
+        }
+      }
+    },
+    "verification_status": {
+      "type": "object",
+      "description": "Consolidated verification state across all the user's held roles. One account, one login, with per-role verification tracked here rather than scattered across separate profile entities. Each role is independently verifiable.",
+      "properties": {
+        "overall_status": {
+          "type": "string",
+          "enum": [
+            "not_submitted",
+            "pending",
+            "under_review",
+            "verified",
+            "rejected",
+            "suspended"
+          ],
+          "default": "not_submitted",
+          "description": "Highest-level consolidated verification status across all held roles"
+        },
+        "identity_verified": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether the user's core identity (email, phone, government ID) has been verified"
+        },
+        "fan_verified": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether the fan/subscriber role has been verified (active paid subscription entitlement confirms subscriber status)"
+        },
+        "artist_verified": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether this user's artist profile has been verified (ArtistProfile.is_verified)"
+        },
+        "frequency_community_verified": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether the user's Frequency Community role has been verified (member of an active FrequencyCommunity)"
+        },
+        "discovery_partner_verified": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether this user's discovery partner profile has been verified"
+        },
+        "radio_verified": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether this user's radio station application has been verified (RadioStation.verification_status === 'verified')"
+        },
+        "business_verified": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether this user's business partner profile has been verified (BusinessPartner.is_verified)"
+        },
+        "professional_consultant_verified": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether the Professional Consultant / Resource Contributor role has been verified (admin-reviewed verification of credentials or professional standing)"
+        },
+        "last_checked_date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the verification status was last recomputed from source profiles"
+        }
+      }
+    },
+    "display_name": {
+      "type": "string"
+    },
+    "avatar_url": {
+      "type": "string"
+    },
+    "location": {
+      "type": "string"
+    },
+    "monthly_budget": {
+      "type": "number",
+      "default": 12,
+      "description": "Monthly support budget in dollars"
+    },
+    "wallet_balance": {
+      "type": "number",
+      "default": 0
+    },
+    "badges": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "joined_communities": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "supported_artist_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "referral_count": {
+      "type": "number",
+      "default": 0
+    },
+    "dismissed_default_artist_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": [],
+      "description": "Default platform artists the fan has dismissed"
+    },
+    "is_beta_member": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether this user joined during the beta period"
+    },
+    "beta_plan": {
+      "type": "string",
+      "description": "Beta subscription plan code the user is on (e.g. frequency_free_beta, founding_supporter_beta)"
+    },
+    "beta_join_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the user joined the beta"
+    },
+    "founding_member_status": {
+      "type": "string",
+      "enum": [
+        "none",
+        "founding",
+        "converted"
+      ],
+      "default": "none",
+      "description": "Founding member designation status"
+    },
+    "founding_price": {
+      "type": "number",
+      "default": 0,
+      "description": "Locked founding price the member pays (0 for free tiers)"
+    },
+    "founding_price_expiration": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the founding price protection expires"
+    },
+    "beta_badge": {
+      "type": "string",
+      "description": "Beta badge identifier shown on the user's profile"
+    },
+    "converted_to_public_plan": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether the user has been migrated from a beta plan to a public plan"
+    },
+    "beta_feedback_participation": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether the user has opted into beta feedback tools"
+    },
+    "beta_invitation_code": {
+      "type": "string",
+      "description": "Invitation code used to join the beta (for invite-only mode)"
+    }
+  }
+}

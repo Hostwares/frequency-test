@@ -1,0 +1,113 @@
+{
+  "name": "PartnerFollow",
+  "type": "object",
+  "properties": {
+    "partner_id": {
+      "type": "string",
+      "description": "Discovery Partner being followed"
+    },
+    "follower_user_id": {
+      "type": "string",
+      "description": "User following the partner"
+    },
+    "follower_name": {
+      "type": "string"
+    },
+    "follower_type": {
+      "type": "string",
+      "enum": [
+        "fan",
+        "artist",
+        "community",
+        "discovery_partner",
+        "radio_programmer"
+      ],
+      "default": "fan"
+    },
+    "community_id": {
+      "type": "string",
+      "description": "If a community is following, the community ID"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "required": [
+    "partner_id",
+    "follower_user_id"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "data.follower_user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "data.follower_user_id": "{{user.id}}"
+        },
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "data.follower_user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "data.follower_user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    }
+  }
+}

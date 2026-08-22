@@ -1,0 +1,137 @@
+{
+  "name": "EventCheckIn",
+  "type": "object",
+  "properties": {
+    "event_id": {
+      "type": "string",
+      "description": "Reference to Event entity"
+    },
+    "event_title": {
+      "type": "string"
+    },
+    "user_id": {
+      "type": "string"
+    },
+    "user_name": {
+      "type": "string"
+    },
+    "rsvp_id": {
+      "type": "string",
+      "description": "Reference to EventRSVP if they had an RSVP"
+    },
+    "check_in_method": {
+      "type": "string",
+      "enum": [
+        "qr_scan",
+        "manual",
+        "self_check_in"
+      ],
+      "default": "qr_scan"
+    },
+    "checked_in_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "verified_by": {
+      "type": "string",
+      "description": "Staff user ID who verified the check-in"
+    },
+    "verified_by_name": {
+      "type": "string"
+    },
+    "party_size": {
+      "type": "number",
+      "default": 1
+    },
+    "seat_number": {
+      "type": "string"
+    },
+    "is_valid": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether the check-in was valid (not duplicate, not fake)"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "event_id",
+    "user_id",
+    "user_name",
+    "check_in_method"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "data.user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "data.user_id": "{{user.id}}"
+        },
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "data.user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "data.user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    }
+  }
+}

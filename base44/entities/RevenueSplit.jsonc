@@ -1,0 +1,293 @@
+{
+  "name": "RevenueSplit",
+  "type": "object",
+  "properties": {
+    "artist_profile_id": {
+      "type": "string",
+      "description": "Reference to ArtistProfile"
+    },
+    "artist_user_id": {
+      "type": "string",
+      "description": "The artist who owns and manages this split"
+    },
+    "split_name": {
+      "type": "string",
+      "description": "Display name for the Revenue Split"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of how this split is used"
+    },
+    "split_type": {
+      "type": "string",
+      "enum": [
+        "artist_default",
+        "album",
+        "single",
+        "song"
+      ],
+      "description": "Split type determining priority: song (highest) > single > album > artist_default (lowest)"
+    },
+    "assignment_type": {
+      "type": "string",
+      "enum": [
+        "entire_account",
+        "album",
+        "ep",
+        "single",
+        "song"
+      ],
+      "description": "What this split is assigned to"
+    },
+    "release_id": {
+      "type": "string",
+      "description": "Release ID for album/EP/single assignment"
+    },
+    "release_name": {
+      "type": "string"
+    },
+    "song_id": {
+      "type": "string",
+      "description": "Song ID for song-level splits"
+    },
+    "song_name": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "pending_approval",
+        "active",
+        "archived"
+      ],
+      "default": "draft",
+      "description": "Current lifecycle status of the split"
+    },
+    "effective_date": {
+      "type": "string",
+      "format": "date",
+      "description": "When the split terms take effect"
+    },
+    "start_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "end_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Optional end date for the split"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Internal artist notes"
+    },
+    "require_collaborator_approval": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether collaborators must approve their assigned percentage before the split activates"
+    },
+    "total_percentage": {
+      "type": "number",
+      "default": 0,
+      "description": "Running total of all collaborator percentages (must equal 100 to activate)"
+    },
+    "collaborators": {
+      "type": "array",
+      "maxItems": 10,
+      "default": [],
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Internal collaborator ID within this split"
+          },
+          "collaborator_type": {
+            "type": "string",
+            "enum": [
+              "platform_user",
+              "external"
+            ],
+            "default": "external"
+          },
+          "collaborator_user_id": {
+            "type": "string",
+            "description": "Platform User ID if registered"
+          },
+          "full_name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "lead_vocal",
+              "guitar",
+              "bass",
+              "drums",
+              "keyboard",
+              "producer",
+              "songwriter",
+              "composer",
+              "mixer",
+              "engineer",
+              "mastering_engineer",
+              "featured_artist",
+              "publisher",
+              "manager",
+              "business_partner",
+              "marketing",
+              "other"
+            ]
+          },
+          "revenue_percentage": {
+            "type": "number",
+            "default": 0,
+            "description": "Percentage of net revenue (0-100)"
+          },
+          "payment_method": {
+            "type": "string",
+            "enum": [
+              "frequency_wallet",
+              "stripe_connect",
+              "paypal",
+              "ach",
+              "bank_transfer",
+              "manual"
+            ],
+            "default": "frequency_wallet"
+          },
+          "payment_status": {
+            "type": "string",
+            "enum": [
+              "pending_setup",
+              "verified",
+              "ready",
+              "suspended"
+            ],
+            "default": "pending_setup"
+          },
+          "verification_status": {
+            "type": "string",
+            "enum": [
+              "pending",
+              "verified",
+              "rejected"
+            ],
+            "default": "pending"
+          },
+          "approval_status": {
+            "type": "string",
+            "enum": [
+              "pending",
+              "approved",
+              "rejected",
+              "needs_revision"
+            ],
+            "default": "pending"
+          },
+          "notes": {
+            "type": "string"
+          },
+          "invited_date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "approved_date": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "full_name",
+          "role",
+          "revenue_percentage"
+        ]
+      },
+      "description": "Up to 10 collaborators sharing revenue"
+    }
+  },
+  "required": [
+    "artist_profile_id",
+    "artist_user_id",
+    "split_name",
+    "split_type",
+    "assignment_type"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "data.artist_user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "data.artist_user_id": "{{user.id}}"
+        },
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "data.artist_user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "data.artist_user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    }
+  }
+}

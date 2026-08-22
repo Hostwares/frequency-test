@@ -1,0 +1,112 @@
+{
+  "name": "EventSeat",
+  "type": "object",
+  "properties": {
+    "event_id": {
+      "type": "string",
+      "description": "Reference to Event entity"
+    },
+    "section": {
+      "type": "string",
+      "description": "Section name (e.g. A, B, VIP, Balcony)"
+    },
+    "row": {
+      "type": "string",
+      "description": "Row identifier"
+    },
+    "seat_number": {
+      "type": "string",
+      "description": "Seat number within the row"
+    },
+    "seat_label": {
+      "type": "string",
+      "description": "Full display label e.g. 'A-12' or 'VIP-3'"
+    },
+    "seat_type": {
+      "type": "string",
+      "enum": [
+        "standard",
+        "vip",
+        "accessible",
+        "standing",
+        "premium",
+        "box"
+      ],
+      "default": "standard"
+    },
+    "price": {
+      "type": "number",
+      "description": "Price for this specific seat"
+    },
+    "is_available": {
+      "type": "boolean",
+      "default": true
+    },
+    "is_reserved": {
+      "type": "boolean",
+      "default": false
+    },
+    "reserved_by_user_id": {
+      "type": "string"
+    },
+    "reserved_by_name": {
+      "type": "string"
+    },
+    "rsvp_id": {
+      "type": "string",
+      "description": "Reference to EventRSVP that reserved this seat"
+    },
+    "is_accessible": {
+      "type": "boolean",
+      "default": false,
+      "description": "Wheelchair accessible seating"
+    },
+    "has_restricted_view": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "required": [
+    "event_id",
+    "section",
+    "seat_number"
+  ],
+  "rls": {
+    "read": {},
+    "create": {},
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    }
+  }
+}

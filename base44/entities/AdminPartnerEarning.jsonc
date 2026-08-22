@@ -1,0 +1,155 @@
+{
+  "name": "AdminPartnerEarning",
+  "type": "object",
+  "properties": {
+    "admin_partner_id": {
+      "type": "string",
+      "description": "Reference to AdminPartner"
+    },
+    "partner_name": {
+      "type": "string"
+    },
+    "user_id": {
+      "type": "string",
+      "description": "User ID of the admin partner"
+    },
+    "month": {
+      "type": "string",
+      "description": "YYYY-MM format for monthly tracking"
+    },
+    "year": {
+      "type": "number",
+      "description": "Year for annual grouping"
+    },
+    "gross_revenue": {
+      "type": "number",
+      "default": 0,
+      "description": "Gross platform revenue for the period"
+    },
+    "platform_expenses": {
+      "type": "number",
+      "default": 0,
+      "description": "Total platform expenses for the period"
+    },
+    "net_revenue": {
+      "type": "number",
+      "default": 0,
+      "description": "Net distributable revenue (gross - expenses)"
+    },
+    "revenue_share_percentage": {
+      "type": "number",
+      "default": 0,
+      "description": "Partner's share percentage at time of calculation"
+    },
+    "estimated_payout": {
+      "type": "number",
+      "default": 0,
+      "description": "Estimated partner payout (net * share%)"
+    },
+    "paid_amount": {
+      "type": "number",
+      "default": 0,
+      "description": "Amount already paid out"
+    },
+    "pending_amount": {
+      "type": "number",
+      "default": 0,
+      "description": "Amount pending payout"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "calculated",
+        "paid",
+        "partial"
+      ],
+      "default": "pending",
+      "description": "Payout status for this period"
+    },
+    "paid_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "admin_partner_id",
+    "month"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "data.user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "data.user_id": "{{user.id}}"
+        },
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "data.user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "data.user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    }
+  }
+}

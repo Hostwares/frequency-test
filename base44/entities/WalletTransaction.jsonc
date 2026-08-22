@@ -1,0 +1,166 @@
+{
+  "name": "WalletTransaction",
+  "type": "object",
+  "properties": {
+    "user_id": {
+      "type": "string",
+      "description": "User who owns this wallet transaction"
+    },
+    "transaction_type": {
+      "type": "string",
+      "enum": [
+        "support_payment",
+        "merch_purchase",
+        "ticket_purchase",
+        "donation",
+        "refund",
+        "payout",
+        "top_up",
+        "subscription",
+        "fee"
+      ],
+      "description": "Type of financial transaction"
+    },
+    "amount": {
+      "type": "number",
+      "description": "Transaction amount in dollars (positive = credit, negative = debit)"
+    },
+    "direction": {
+      "type": "string",
+      "enum": [
+        "debit",
+        "credit"
+      ],
+      "description": "Money in or money out"
+    },
+    "payment_method": {
+      "type": "string",
+      "enum": [
+        "stripe",
+        "paypal",
+        "apple_pay",
+        "google_pay",
+        "wix_payments",
+        "wallet_balance",
+        "bank_transfer"
+      ],
+      "description": "Payment provider used"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "completed",
+        "failed",
+        "refunded",
+        "disputed"
+      ],
+      "default": "pending"
+    },
+    "order_id": {
+      "type": "string",
+      "description": "Reference to Order entity if applicable"
+    },
+    "support_allocation_id": {
+      "type": "string",
+      "description": "Reference to SupportAllocation if applicable"
+    },
+    "artist_profile_id": {
+      "type": "string",
+      "description": "Related artist if applicable"
+    },
+    "event_id": {
+      "type": "string",
+      "description": "Related event if applicable"
+    },
+    "description": {
+      "type": "string",
+      "description": "Human-readable transaction description"
+    },
+    "checkout_session_id": {
+      "type": "string",
+      "description": "External checkout session ID"
+    },
+    "external_transaction_id": {
+      "type": "string",
+      "description": "External payment provider transaction ID"
+    },
+    "balance_after": {
+      "type": "number",
+      "default": 0,
+      "description": "Wallet balance after this transaction"
+    },
+    "created_date": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "user_id",
+    "transaction_type",
+    "amount",
+    "direction",
+    "payment_method"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "data.user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    }
+  }
+}

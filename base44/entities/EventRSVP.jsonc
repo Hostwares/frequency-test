@@ -1,0 +1,147 @@
+{
+  "name": "EventRSVP",
+  "type": "object",
+  "properties": {
+    "event_id": {
+      "type": "string",
+      "description": "Reference to Event entity"
+    },
+    "event_title": {
+      "type": "string"
+    },
+    "user_id": {
+      "type": "string",
+      "description": "User who RSVP'd"
+    },
+    "user_name": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "going",
+        "interested",
+        "not_going"
+      ],
+      "default": "going"
+    },
+    "party_size": {
+      "type": "number",
+      "default": 1,
+      "description": "Number of people in the party"
+    },
+    "ticket_tier_id": {
+      "type": "string",
+      "description": "If they purchased a ticket, reference to TicketTier"
+    },
+    "order_id": {
+      "type": "string",
+      "description": "Reference to Order if ticket was purchased"
+    },
+    "qr_code_hash": {
+      "type": "string",
+      "description": "Unique hash for QR code entry verification"
+    },
+    "checked_in": {
+      "type": "boolean",
+      "default": false
+    },
+    "checked_in_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "checked_in_by": {
+      "type": "string",
+      "description": "User ID of staff who checked them in"
+    },
+    "seat_number": {
+      "type": "string",
+      "description": "Assigned seat number if seating is reserved"
+    },
+    "seat_section": {
+      "type": "string"
+    },
+    "seat_row": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "event_id",
+    "user_id",
+    "user_name",
+    "status"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "data.user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "data.user_id": "{{user.id}}"
+        },
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "data.user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "data.user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    }
+  }
+}

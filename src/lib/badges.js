@@ -1,0 +1,242 @@
+/**
+ * Badge definitions — each badge has an id, title, description, icon (emoji),
+ * color (neon token), and an `earned` function that takes { allocations, referrals, totalSpent }.
+ * 
+ * This file defines the logic for computing which badges a fan has earned.
+ * Badges are stored in the FanBadge entity when awarded by the backend automation.
+ */
+export const BADGE_DEFINITIONS = [
+  // --- Support milestones ---
+  {
+    id: 'first_note',
+    title: 'First Note',
+    description: 'Supported your first artist',
+    icon: '🎵',
+    color: 'cyan',
+    earned: ({ allocations }) => allocations.length >= 1,
+  },
+  {
+    id: 'harmony',
+    title: 'Harmony',
+    description: 'Supporting 3 or more artists',
+    icon: '🎶',
+    color: 'cyan',
+    earned: ({ allocations }) => allocations.length >= 3,
+  },
+  {
+    id: 'top_listener',
+    title: 'Top Listener',
+    description: 'Supporting 5 or more artists simultaneously',
+    icon: '🎧',
+    color: 'purple',
+    earned: ({ allocations }) => allocations.length >= 5,
+  },
+  {
+    id: 'dedicated_fan',
+    title: 'Dedicated Fan',
+    description: 'Supporting 10 or more artists',
+    icon: '🌟',
+    color: 'purple',
+    earned: ({ allocations }) => allocations.length >= 10,
+  },
+  // --- Spending milestones ---
+  {
+    id: 'supporter',
+    title: 'Supporter',
+    description: 'Reached $5/mo in total support',
+    icon: '💜',
+    color: 'purple',
+    earned: ({ totalSpent }) => totalSpent >= 5,
+  },
+  {
+    id: 'super_supporter',
+    title: 'Super Supporter',
+    description: 'Reached $20/mo in total support',
+    icon: '⚡',
+    color: 'magenta',
+    earned: ({ totalSpent }) => totalSpent >= 20,
+  },
+  {
+    id: 'patron',
+    title: 'Patron of the Arts',
+    description: 'Reached $50/mo in total support',
+    icon: '👑',
+    color: 'magenta',
+    earned: ({ totalSpent }) => totalSpent >= 50,
+  },
+  {
+    id: 'champion',
+    title: 'Champion',
+    description: 'Reached $100/mo in total support',
+    icon: '🏆',
+    color: 'magenta',
+    earned: ({ totalSpent }) => totalSpent >= 100,
+  },
+  // --- Referral milestones ---
+  {
+    id: 'connector',
+    title: 'Connector',
+    description: 'Referred your first fan',
+    icon: '🔗',
+    color: 'turquoise',
+    earned: ({ referrals }) => referrals >= 1,
+  },
+  {
+    id: 'fan_scout',
+    title: 'Fan Scout',
+    description: 'Referred 5 or more fans',
+    icon: '👀',
+    color: 'blue',
+    earned: ({ referrals }) => referrals >= 5,
+  },
+  {
+    id: 'amplifier',
+    title: 'Amplifier',
+    description: 'Referred 3 or more fans',
+    icon: '📡',
+    color: 'turquoise',
+    earned: ({ referrals }) => referrals >= 3,
+  },
+  {
+    id: 'signal_booster',
+    title: 'Signal Booster',
+    description: 'Referred 10 or more fans',
+    icon: '🚀',
+    color: 'cyan',
+    earned: ({ referrals }) => referrals >= 10,
+  },
+  {
+    id: 'movement_maker',
+    title: 'Movement Maker',
+    description: 'Referred 25 or more fans',
+    icon: '🌊',
+    color: 'magenta',
+    earned: ({ referrals }) => referrals >= 25,
+  },
+  // --- Tier milestones ---
+  {
+    id: 'patron_tier',
+    title: 'True Patron',
+    description: 'Has at least one Patron-tier support',
+    icon: '💎',
+    color: 'blue',
+    earned: ({ allocations }) => allocations.some(a => a.tier === 'patron'),
+  },
+  {
+    id: 'all_in',
+    title: 'All In',
+    description: 'Budget fully allocated',
+    icon: '🔥',
+    color: 'magenta',
+    earned: ({ totalSpent, budget }) => budget > 0 && totalSpent >= budget,
+  },
+  // --- Legacy milestone badges (for display compatibility) ---
+  {
+    id: 'early_supporter',
+    title: 'Early Supporter',
+    description: 'One of the first to support emerging artists',
+    icon: '⭐',
+    color: 'cyan',
+    earned: ({ allocations, totalSpent }) => allocations.length >= 1 && totalSpent >= 10,
+  },
+  {
+    id: 'super_fan',
+    title: 'Super Fan',
+    description: 'Supported artists with $50+ total',
+    icon: '❤️',
+    color: 'blue',
+    earned: ({ totalSpent }) => totalSpent >= 50,
+  },
+  {
+    id: 'mega_fan',
+    title: 'Mega Fan',
+    description: 'Supported artists with $200+ total',
+    icon: '🏅',
+    color: 'purple',
+    earned: ({ totalSpent }) => totalSpent >= 200,
+  },
+  {
+    id: 'ultra_fan',
+    title: 'Ultra Fan',
+    description: 'Supported artists with $500+ total',
+    icon: '🏆',
+    color: 'magenta',
+    earned: ({ totalSpent }) => totalSpent >= 500,
+  },
+  {
+    id: 'legendary_fan',
+    title: 'Legendary Fan',
+    description: 'Supported artists with $1000+ total',
+    icon: '👑',
+    color: 'cyan',
+    earned: ({ totalSpent }) => totalSpent >= 1000,
+  },
+  {
+    id: 'referral_master',
+    title: 'Referral Master',
+    description: 'Referred 15+ listeners to the platform',
+    icon: '🎯',
+    color: 'purple',
+    earned: ({ referrals }) => referrals >= 15,
+  },
+  {
+    id: 'referral_legend',
+    title: 'Referral Legend',
+    description: 'Referred 50+ listeners to the platform',
+    icon: '👑',
+    color: 'cyan',
+    earned: ({ referrals }) => referrals >= 50,
+  },
+  // --- Mainstream First / Heard First permanent badges ---
+  {
+    id: 'original_supporter',
+    title: 'Original Supporter',
+    description: 'Supported a Mainstream First™ track during its 12-week exclusive period',
+    icon: '🥇',
+    color: 'magenta',
+    permanent: true,
+    earned: ({ mainstreamBadges }) => (mainstreamBadges || []).includes('original_supporter'),
+  },
+  {
+    id: 'first_listener',
+    title: 'First Listener',
+    description: 'Listened to a Mainstream First™ track during its exclusive period',
+    icon: '🎧',
+    color: 'cyan',
+    permanent: true,
+    earned: ({ mainstreamBadges }) => (mainstreamBadges || []).includes('first_listener'),
+  },
+  {
+    id: 'first_wave',
+    title: 'First Wave',
+    description: 'Among the first wave of fans to discover a Mainstream First™ track',
+    icon: '🌊',
+    color: 'turquoise',
+    permanent: true,
+    earned: ({ mainstreamBadges }) => (mainstreamBadges || []).includes('first_wave'),
+  },
+  {
+    id: 'day_one_supporter',
+    title: 'Day One Supporter',
+    description: 'Supported a Mainstream First™ track on its release day',
+    icon: '⭐',
+    color: 'purple',
+    permanent: true,
+    earned: ({ mainstreamBadges }) => (mainstreamBadges || []).includes('day_one_supporter'),
+  },
+  {
+    id: 'early_believer',
+    title: 'Early Believer',
+    description: 'Believed in a Mainstream First™ track within its first week',
+    icon: '🚀',
+    color: 'blue',
+    permanent: true,
+    earned: ({ mainstreamBadges }) => (mainstreamBadges || []).includes('early_believer'),
+  },
+];
+
+export function computeEarnedBadges({ allocations, referralCount, budget }) {
+  const totalSpent = allocations.reduce((s, a) => s + (a.amount || 0), 0);
+  const context = { allocations, referrals: referralCount || 0, totalSpent, budget };
+  return BADGE_DEFINITIONS.filter(b => b.earned(context));
+}

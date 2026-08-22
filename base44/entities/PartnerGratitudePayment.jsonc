@@ -1,0 +1,162 @@
+{
+  "name": "PartnerGratitudePayment",
+  "type": "object",
+  "properties": {
+    "artist_profile_id": {
+      "type": "string",
+      "description": "The artist sending the payment"
+    },
+    "artist_name": {
+      "type": "string"
+    },
+    "discovery_partner_id": {
+      "type": "string",
+      "description": "The Discovery Partner receiving the payment"
+    },
+    "partner_name": {
+      "type": "string"
+    },
+    "payment_type": {
+      "type": "string",
+      "enum": [
+        "percentage",
+        "custom_amount"
+      ],
+      "default": "percentage",
+      "description": "Whether this is a percentage-based or custom amount payment"
+    },
+    "percentage": {
+      "type": "number",
+      "description": "Percentage of royalties being sent (e.g., 5, 10, 15). Only used for percentage-based payments."
+    },
+    "custom_amount": {
+      "type": "number",
+      "description": "Custom amount in dollars. Only used for custom amount payments."
+    },
+    "amount": {
+      "type": "number",
+      "description": "Actual amount in dollars (calculated from percentage or custom_amount)"
+    },
+    "milestone_trigger": {
+      "type": "string",
+      "enum": [
+        "20k_fans",
+        "30k_fans",
+        "40k_fans",
+        "50k_fans",
+        "60k_fans",
+        "custom"
+      ],
+      "description": "The milestone that triggered this payment"
+    },
+    "message": {
+      "type": "string",
+      "description": "Optional thank you message from the artist"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "completed",
+        "cancelled"
+      ],
+      "default": "pending"
+    },
+    "payment_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "month": {
+      "type": "string",
+      "description": "YYYY-MM format for the royalty month"
+    },
+    "notification_sent": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether the email notification was sent to the Discovery Partner"
+    },
+    "notification_sent_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the email notification was sent"
+    }
+  },
+  "required": [
+    "artist_profile_id",
+    "artist_name",
+    "discovery_partner_id",
+    "partner_name",
+    "amount",
+    "milestone_trigger"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    }
+  }
+}

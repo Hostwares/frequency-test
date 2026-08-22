@@ -1,0 +1,212 @@
+{
+  "name": "AdminPartner",
+  "type": "object",
+  "properties": {
+    "user_id": {
+      "type": "string",
+      "description": "Reference to the User entity"
+    },
+    "partner_name": {
+      "type": "string",
+      "description": "Display name for this Admin Partner"
+    },
+    "partner_email": {
+      "type": "string",
+      "description": "Email used for the invite"
+    },
+    "revenue_share_percentage": {
+      "type": "number",
+      "default": 0,
+      "description": "Ownership / revenue share percentage (0-100)"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether this admin partner account is active"
+    },
+    "created_by_user_id": {
+      "type": "string",
+      "description": "Master Admin who created this partner"
+    },
+    "created_by_name": {
+      "type": "string"
+    },
+    "permissions": {
+      "type": "object",
+      "description": "Granular permission toggles controlled by Master Admin",
+      "properties": {
+        "can_view_users": {
+          "type": "boolean",
+          "default": true
+        },
+        "can_edit_users": {
+          "type": "boolean",
+          "default": false
+        },
+        "can_view_artists": {
+          "type": "boolean",
+          "default": true
+        },
+        "can_edit_artists": {
+          "type": "boolean",
+          "default": false
+        },
+        "can_view_songs": {
+          "type": "boolean",
+          "default": true
+        },
+        "can_edit_songs": {
+          "type": "boolean",
+          "default": false
+        },
+        "can_view_payments": {
+          "type": "boolean",
+          "default": true
+        },
+        "can_edit_payments": {
+          "type": "boolean",
+          "default": false
+        },
+        "can_view_subscriptions": {
+          "type": "boolean",
+          "default": true
+        },
+        "can_edit_subscriptions": {
+          "type": "boolean",
+          "default": false
+        },
+        "can_view_marketplace": {
+          "type": "boolean",
+          "default": true
+        },
+        "can_edit_marketplace": {
+          "type": "boolean",
+          "default": false
+        },
+        "can_view_events": {
+          "type": "boolean",
+          "default": true
+        },
+        "can_edit_events": {
+          "type": "boolean",
+          "default": false
+        },
+        "can_view_reports": {
+          "type": "boolean",
+          "default": true
+        },
+        "can_export_reports": {
+          "type": "boolean",
+          "default": false
+        },
+        "can_view_private_radio_data": {
+          "type": "boolean",
+          "default": false
+        },
+        "can_view_legal_takedowns": {
+          "type": "boolean",
+          "default": false
+        },
+        "can_manage_support_tickets": {
+          "type": "boolean",
+          "default": false
+        },
+        "can_manage_business_partners": {
+          "type": "boolean",
+          "default": false
+        }
+      },
+      "default": {}
+    },
+    "last_login_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "milestones_notified": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": [],
+      "description": "Milestone thresholds already notified via email (e.g. 'milestone_100', 'milestone_500')"
+    }
+  },
+  "required": [
+    "user_id",
+    "partner_name",
+    "partner_email"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "data.user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "data.user_id": "{{user.id}}"
+        },
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "data.user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "data.user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    }
+  }
+}

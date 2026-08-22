@@ -1,0 +1,161 @@
+{
+  "name": "Product",
+  "type": "object",
+  "properties": {
+    "artist_profile_id": {
+      "type": "string",
+      "description": "Reference to ArtistProfile"
+    },
+    "artist_name": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string",
+      "description": "Product title"
+    },
+    "description": {
+      "type": "string",
+      "description": "Product description"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "merch",
+        "vinyl",
+        "cd",
+        "poster",
+        "digital_download",
+        "experience",
+        "lesson",
+        "other"
+      ],
+      "default": "merch"
+    },
+    "product_type": {
+      "type": "string",
+      "enum": [
+        "physical",
+        "digital"
+      ],
+      "default": "physical",
+      "description": "Whether this is a physical or digital product"
+    },
+    "price": {
+      "type": "number",
+      "description": "Price in dollars"
+    },
+    "compare_at_price": {
+      "type": "number",
+      "description": "Original price for showing discounts"
+    },
+    "images": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Array of image URLs"
+    },
+    "digital_file_url": {
+      "type": "string",
+      "description": "URL to digital file (for digital products)"
+    },
+    "inventory_count": {
+      "type": "number",
+      "default": 0,
+      "description": "Number of items in stock"
+    },
+    "is_unlimited": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether inventory is unlimited"
+    },
+    "shipping_cost": {
+      "type": "number",
+      "default": 0,
+      "description": "Shipping cost in dollars"
+    },
+    "variants": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "price_modifier": {
+            "type": "number"
+          },
+          "inventory": {
+            "type": "number"
+          }
+        }
+      }
+    },
+    "is_available": {
+      "type": "boolean",
+      "default": true
+    },
+    "is_featured": {
+      "type": "boolean",
+      "default": false
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "total_sales": {
+      "type": "number",
+      "default": 0
+    },
+    "total_revenue": {
+      "type": "number",
+      "default": 0
+    }
+  },
+  "required": [
+    "artist_profile_id",
+    "artist_name",
+    "title",
+    "price"
+  ],
+  "rls": {
+    "read": {},
+    "create": {},
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    }
+  }
+}

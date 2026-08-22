@@ -1,0 +1,139 @@
+{
+  "name": "ModerationAction",
+  "type": "object",
+  "properties": {
+    "community_id": {
+      "type": "string",
+      "description": "Reference to FrequencyCommunity"
+    },
+    "moderator_user_id": {
+      "type": "string"
+    },
+    "moderator_name": {
+      "type": "string"
+    },
+    "action_type": {
+      "type": "string",
+      "enum": [
+        "warn",
+        "mute",
+        "ban",
+        "unmute",
+        "unban",
+        "delete_message",
+        "remove_photo",
+        "close_poll",
+        "pin_announcement",
+        "unpin_announcement",
+        "approve_photo",
+        "flag_message"
+      ],
+      "description": "Type of moderation action taken"
+    },
+    "target_user_id": {
+      "type": "string",
+      "description": "User affected by the action (if applicable)"
+    },
+    "target_user_name": {
+      "type": "string"
+    },
+    "target_type": {
+      "type": "string",
+      "enum": [
+        "message",
+        "photo",
+        "poll",
+        "announcement",
+        "user"
+      ],
+      "description": "What type of entity was acted upon"
+    },
+    "target_id": {
+      "type": "string",
+      "description": "ID of the targeted entity"
+    },
+    "reason": {
+      "type": "string",
+      "maxLength": 1000,
+      "description": "Why the action was taken"
+    },
+    "duration_hours": {
+      "type": "number",
+      "description": "Duration for temporary actions (mute, ban)"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether this action is still in effect"
+    },
+    "expires_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When a temporary action expires"
+    }
+  },
+  "required": [
+    "community_id",
+    "moderator_user_id",
+    "moderator_name",
+    "action_type"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    }
+  }
+}

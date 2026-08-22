@@ -1,0 +1,299 @@
+{
+  "name": "ArtistProfile",
+  "type": "object",
+  "properties": {
+    "user_id": {
+      "type": "string",
+      "description": "Reference to the User entity. Set when the artist logs in for the first time \u2014 the system auto-links this field by matching the artist_email to the logged-in user's email."
+    },
+    "artist_email": {
+      "type": "string",
+      "description": "Email the admin entered when creating the artist account. Used to auto-link the profile to the user on first login."
+    },
+    "artist_name": {
+      "type": "string",
+      "description": "Stage name or band name"
+    },
+    "artist_handle": {
+      "type": "string",
+      "description": "Unique permanent Artist Handle (lowercase, no spaces, no ! prefix stored). Displayed as !handle across the platform.",
+      "pattern": "^[a-z0-9_]{3,30}$"
+    },
+    "previous_handles": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Previous handles for redirect preservation",
+      "default": []
+    },
+    "mainstream_first_badge": {
+      "type": "string",
+      "enum": [
+        "none",
+        "mainstream_first",
+        "heard_first"
+      ],
+      "default": "none",
+      "description": "Mainstream First\u2122 exclusive release badge status"
+    },
+    "mainstream_first_until": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the 12-week Mainstream First exclusive period ends"
+    },
+    "bio": {
+      "type": "string",
+      "description": "Artist biography",
+      "maxLength": 7000
+    },
+    "genre": {
+      "type": "string",
+      "description": "Primary genre \u2014 any genre from the full platform genre list"
+    },
+    "sub_genres": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Additional genres"
+    },
+    "profile_image": {
+      "type": "string"
+    },
+    "cover_image": {
+      "type": "string"
+    },
+    "location": {
+      "type": "string"
+    },
+    "website": {
+      "type": "string"
+    },
+    "social_links": {
+      "type": "object",
+      "properties": {
+        "instagram": {
+          "type": "string"
+        },
+        "twitter": {
+          "type": "string"
+        },
+        "youtube": {
+          "type": "string"
+        },
+        "tiktok": {
+          "type": "string"
+        }
+      }
+    },
+    "social_platforms": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "platform": {
+            "type": "string",
+            "enum": [
+              "instagram",
+              "twitter",
+              "youtube",
+              "tiktok",
+              "facebook",
+              "spotify",
+              "apple_music",
+              "soundcloud",
+              "bandcamp",
+              "other"
+            ],
+            "description": "Social media or music platform"
+          },
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "Full URL to the artist's profile"
+          },
+          "username": {
+            "type": "string",
+            "description": "Username/handle on this platform"
+          }
+        },
+        "required": [
+          "platform",
+          "url"
+        ]
+      },
+      "maxItems": 3,
+      "description": "Up to 3 social/media platform links"
+    },
+    "verification_badge": {
+      "type": "string",
+      "enum": [
+        "human_created",
+        "human_assisted",
+        "ai_assisted",
+        "ai_generated"
+      ],
+      "default": "human_created"
+    },
+    "is_verified": {
+      "type": "boolean",
+      "default": false
+    },
+    "admin_verification_status": {
+      "type": "string",
+      "enum": [
+        "unverified",
+        "pending_review",
+        "verified",
+        "rejected"
+      ],
+      "default": "unverified",
+      "description": "Admin review status of this artist's completed profile. unverified = newly created, pending_review = artist submitted for review, verified = admin approved, rejected = admin rejected. Admin can toggle this after reviewing the artist's completed profile."
+    },
+    "admin_verification_notes": {
+      "type": "string",
+      "description": "Admin notes about the verification review"
+    },
+    "admin_verified_by_id": {
+      "type": "string",
+      "description": "User ID of the admin who last verified or rejected this profile"
+    },
+    "admin_verified_by_name": {
+      "type": "string",
+      "description": "Name of the admin who last verified or rejected this profile"
+    },
+    "admin_verified_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the admin last verified or rejected this profile"
+    },
+    "is_default_platform_artist": {
+      "type": "boolean",
+      "default": false,
+      "description": "Platform default artists every fan gets by default."
+    },
+    "resonance_score": {
+      "type": "number",
+      "default": 0
+    },
+    "supporter_count": {
+      "type": "number",
+      "default": 0
+    },
+    "monthly_support_total": {
+      "type": "number",
+      "default": 0
+    },
+    "recommended_artists": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "network_name": {
+      "type": "string"
+    },
+    "connected_networks": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "pitch_ready": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether this artist is flagged as Pitch Ready for editorial coverage"
+    },
+    "pitch_notes": {
+      "type": "string",
+      "description": "Editorial notes about why this artist is newsworthy"
+    },
+    "pitch_ready_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the artist was marked as Pitch Ready"
+    },
+    "pitch_alert_sent": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether the Pitch Ready journalist alert has been sent"
+    },
+    "revenue_split_transparency_enabled": {
+      "type": "boolean",
+      "default": false,
+      "description": "Fan Allocation Transparency\u2122 \u2014 whether fans see that this artist shares revenue with collaborators"
+    },
+    "revenue_split_transparency_mode": {
+      "type": "string",
+      "enum": [
+        "summary",
+        "percentages",
+        "full"
+      ],
+      "default": "summary",
+      "description": "Display mode: summary (count only), percentages (roles+%), full (names+roles+%)"
+    },
+    "direct_purchases_enabled": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether this artist allows fans to directly purchase eligible songs the artist has listed for sale on The Mainstream Frequency\u2122."
+    },
+    "purchase_policy": {
+      "type": "string",
+      "enum": [
+        "none",
+        "current_catalog_access"
+      ],
+      "default": "current_catalog_access",
+      "description": "What a qualifying direct song purchase grants the buyer. 'current_catalog_access' grants access to the artist's eligible catalog available on the platform at the time of purchase \u2014 the buyer may listen and add those songs to personal listening playlists. A direct purchase never automatically enrolls the artist into the buyer's recurring monthly Artist Distribution Pool."
+    }
+  },
+  "required": [
+    "artist_name"
+  ],
+  "rls": {
+    "read": {},
+    "create": {},
+    "update": {
+      "$or": [
+        {
+          "data.user_id": "{{user.id}}"
+        },
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "data.user_id": "{{user.id}}"
+        },
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    }
+  }
+}

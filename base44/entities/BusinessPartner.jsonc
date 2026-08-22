@@ -1,0 +1,275 @@
+{
+  "name": "BusinessPartner",
+  "type": "object",
+  "properties": {
+    "user_id": {
+      "type": "string",
+      "description": "User who owns this business partner profile"
+    },
+    "business_name": {
+      "type": "string",
+      "description": "Public business or organization name"
+    },
+    "public_handle": {
+      "type": "string",
+      "description": "Public handle in +partnername format. Unique, protected from impersonation, approved during admin verification.",
+      "pattern": "^[a-zA-Z0-9_]{2,30}$"
+    },
+    "legal_name": {
+      "type": "string",
+      "description": "Registered legal business name"
+    },
+    "partner_category": {
+      "type": "string",
+      "enum": [
+        "hotel",
+        "music_venue",
+        "recording_studio",
+        "rehearsal_space",
+        "ticketing_company",
+        "merchandise_company",
+        "music_equipment_business",
+        "video_production",
+        "photographer",
+        "entertainment_attorney",
+        "marketing_company",
+        "tour_services",
+        "transportation_provider",
+        "restaurant",
+        "event_sponsor",
+        "other"
+      ],
+      "description": "Primary commercial category of the business partner"
+    },
+    "description": {
+      "type": "string",
+      "description": "What the business offers to artists and fans",
+      "maxLength": 5000
+    },
+    "services_offered": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": [],
+      "description": "Services, products, or opportunities the partner provides"
+    },
+    "website": {
+      "type": "string"
+    },
+    "contact_email": {
+      "type": "string"
+    },
+    "contact_phone": {
+      "type": "string"
+    },
+    "city": {
+      "type": "string"
+    },
+    "region": {
+      "type": "string"
+    },
+    "country": {
+      "type": "string"
+    },
+    "logo": {
+      "type": "string"
+    },
+    "cover_image": {
+      "type": "string"
+    },
+    "social_links": {
+      "type": "object",
+      "properties": {
+        "instagram": {
+          "type": "string"
+        },
+        "twitter": {
+          "type": "string"
+        },
+        "facebook": {
+          "type": "string"
+        },
+        "linkedin": {
+          "type": "string"
+        }
+      }
+    },
+    "verification_status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "under_review",
+        "verified",
+        "rejected",
+        "more_info",
+        "suspended"
+      ],
+      "default": "pending",
+      "description": "Admin verification lifecycle. Profile is created first, then verified by an admin."
+    },
+    "verification_type": {
+      "type": "string",
+      "enum": [
+        "verified_business_partner",
+        "none"
+      ],
+      "default": "none",
+      "description": "Badge type displayed on public profile when verified."
+    },
+    "is_verified": {
+      "type": "boolean",
+      "default": false
+    },
+    "verified_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "assigned_reviewer_id": {
+      "type": "string"
+    },
+    "assigned_reviewer_name": {
+      "type": "string"
+    },
+    "decision_reason": {
+      "type": "string"
+    },
+    "requested_information": {
+      "type": "string",
+      "description": "Information requested from the applicant when status is more_info."
+    },
+    "application_submitted_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "offers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "offer_type": {
+            "type": "string",
+            "enum": [
+              "discount",
+              "benefit",
+              "opportunity",
+              "experience"
+            ]
+          },
+          "discount_value": {
+            "type": "string"
+          },
+          "is_active": {
+            "type": "boolean",
+            "default": true
+          },
+          "redemption_count": {
+            "type": "number",
+            "default": 0
+          }
+        }
+      },
+      "default": [],
+      "description": "Approved discounts or benefits offered to artists and fans."
+    },
+    "qr_promotions_enabled": {
+      "type": "boolean",
+      "default": false,
+      "description": "Participate in QR membership promotions."
+    },
+    "referral_program_enabled": {
+      "type": "boolean",
+      "default": false,
+      "description": "Participate in approved referral programs."
+    },
+    "revenue_share_enabled": {
+      "type": "boolean",
+      "default": false,
+      "description": "Participate in approved revenue-sharing programs."
+    },
+    "sponsored_event_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": [],
+      "description": "Events or campaigns sponsored by this partner."
+    },
+    "follower_count": {
+      "type": "number",
+      "default": 0
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "required": [
+    "user_id",
+    "business_name",
+    "partner_category"
+  ],
+  "rls": {
+    "read": {},
+    "create": {
+      "$or": [
+        {
+          "data.user_id": "{{user.id}}"
+        },
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "data.user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "data.user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    }
+  }
+}

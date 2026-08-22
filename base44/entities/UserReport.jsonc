@@ -1,0 +1,143 @@
+{
+  "name": "UserReport",
+  "type": "object",
+  "properties": {
+    "reporter_user_id": {
+      "type": "string",
+      "description": "The user submitting the report"
+    },
+    "reported_user_id": {
+      "type": "string",
+      "description": "The user being reported"
+    },
+    "reported_user_name": {
+      "type": "string",
+      "description": "Display name of the reported user"
+    },
+    "report_type": {
+      "type": "string",
+      "enum": [
+        "harassment",
+        "spam",
+        "inappropriate_content",
+        "scam_fraud",
+        "copyright",
+        "impersonation",
+        "other"
+      ],
+      "description": "Category of the report"
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 1000,
+      "description": "Detailed description of the issue"
+    },
+    "context_url": {
+      "type": "string",
+      "description": "URL where the incident occurred (e.g. artist profile, message thread)"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "under_review",
+        "resolved_warning",
+        "resolved_banned",
+        "dismissed"
+      ],
+      "default": "pending",
+      "description": "Review status"
+    },
+    "admin_notes": {
+      "type": "string",
+      "description": "Admin notes about resolution"
+    },
+    "reviewed_by": {
+      "type": "string",
+      "description": "Admin user ID who reviewed"
+    },
+    "resolved_date": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "reporter_user_id",
+    "reported_user_id",
+    "report_type",
+    "description"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "data.reporter_user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "data.reporter_user_id": "{{user.id}}"
+        },
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "data.reporter_user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "data.reporter_user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    }
+  }
+}

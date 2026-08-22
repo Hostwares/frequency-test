@@ -1,0 +1,98 @@
+{
+  "name": "CommunityPhoto",
+  "type": "object",
+  "properties": {
+    "community_id": {
+      "type": "string",
+      "description": "Reference to FrequencyCommunity"
+    },
+    "uploader_user_id": {
+      "type": "string"
+    },
+    "uploader_name": {
+      "type": "string"
+    },
+    "caption": {
+      "type": "string",
+      "maxLength": 500
+    },
+    "image_url": {
+      "type": "string",
+      "description": "Photo URL"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "event_id": {
+      "type": "string",
+      "description": "Optional link to an Event if photo is from an event"
+    },
+    "is_approved": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether the photo has been approved by moderation"
+    },
+    "likes_count": {
+      "type": "number",
+      "default": 0
+    },
+    "liked_by": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "is_flagged": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "required": [
+    "community_id",
+    "uploader_user_id",
+    "uploader_name",
+    "image_url"
+  ],
+  "rls": {
+    "read": {},
+    "create": {},
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    }
+  }
+}

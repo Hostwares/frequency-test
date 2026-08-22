@@ -1,0 +1,124 @@
+{
+  "name": "FanReview",
+  "type": "object",
+  "properties": {
+    "review_type": {
+      "type": "string",
+      "enum": [
+        "song",
+        "artist"
+      ],
+      "description": "Whether this review is for an individual song or an artist overall"
+    },
+    "song_id": {
+      "type": "string",
+      "description": "Reference to Song. Set when review_type is 'song'; empty for artist reviews."
+    },
+    "song_title": {
+      "type": "string",
+      "description": "Snapshot of the song title at review time (song reviews only)"
+    },
+    "artist_profile_id": {
+      "type": "string",
+      "description": "Reference to ArtistProfile being reviewed. For song reviews, the song's artist; for artist reviews, the artist."
+    },
+    "artist_name": {
+      "type": "string",
+      "description": "Snapshot of the artist name at review time"
+    },
+    "fan_user_id": {
+      "type": "string",
+      "description": "The fan who wrote the review"
+    },
+    "rating": {
+      "type": "number",
+      "enum": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "description": "Star rating from 1 to 5"
+    },
+    "title": {
+      "type": "string",
+      "maxLength": 120,
+      "description": "Optional review headline"
+    },
+    "body": {
+      "type": "string",
+      "maxLength": 2000,
+      "description": "The review text"
+    },
+    "is_name_hidden": {
+      "type": "boolean",
+      "default": true,
+      "description": "When true, the reviewer's identity is hidden from other fans and shown anonymously as 'Frequency Fan'. The artist can still read the review content."
+    }
+  },
+  "required": [
+    "review_type",
+    "artist_profile_id",
+    "fan_user_id",
+    "rating",
+    "body"
+  ],
+  "rls": {
+    "read": {},
+    "create": {
+      "$or": [
+        {
+          "data.fan_user_id": "{{user.id}}"
+        },
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "data.fan_user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "data.fan_user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    }
+  }
+}

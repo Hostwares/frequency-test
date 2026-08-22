@@ -1,0 +1,120 @@
+{
+  "name": "AwardsCategory",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Category name (e.g. Artist of the Year, Song of the Year)"
+    },
+    "description": {
+      "type": "string",
+      "description": "Category description"
+    },
+    "category_type": {
+      "type": "string",
+      "enum": [
+        "artist",
+        "song",
+        "release",
+        "community",
+        "discovery",
+        "radio",
+        "editorial",
+        "special_achievement",
+        "innovation",
+        "live_performance"
+      ],
+      "description": "Type of award category"
+    },
+    "eligibility_criteria": {
+      "type": "string",
+      "description": "What makes a nominee eligible for this category"
+    },
+    "year": {
+      "type": "number",
+      "description": "Awards cycle year"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true
+    },
+    "sort_order": {
+      "type": "number",
+      "default": 0
+    },
+    "max_nominees": {
+      "type": "number",
+      "default": 5,
+      "description": "Maximum number of nominees allowed in this category"
+    },
+    "voting_phase": {
+      "type": "string",
+      "enum": [
+        "nomination",
+        "final_voting",
+        "closed",
+        "not_started"
+      ],
+      "default": "not_started",
+      "description": "Current voting phase for this category"
+    },
+    "voting_open_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the current voting phase opens"
+    },
+    "voting_close_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the current voting phase officially closes"
+    },
+    "deadline_reminder_sent": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether the 48-hour deadline reminder has been sent to assigned governors"
+    }
+  },
+  "required": [
+    "name",
+    "category_type",
+    "year"
+  ],
+  "rls": {
+    "read": {},
+    "create": {},
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    }
+  }
+}

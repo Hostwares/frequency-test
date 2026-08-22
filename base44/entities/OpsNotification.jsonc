@@ -1,0 +1,130 @@
+{
+  "name": "OpsNotification",
+  "type": "object",
+  "properties": {
+    "recipient_user_id": {
+      "type": "string",
+      "description": "Admin/ops user who receives this notification"
+    },
+    "recipient_role": {
+      "type": "string",
+      "enum": [
+        "admin",
+        "master_admin",
+        "ops"
+      ],
+      "description": "Recipient's operational role"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "disbursement_submitted",
+        "payout_completed",
+        "payout_failed",
+        "system_alert"
+      ],
+      "description": "Operational notification type"
+    },
+    "title": {
+      "type": "string"
+    },
+    "body": {
+      "type": "string"
+    },
+    "period": {
+      "type": "string",
+      "description": "Billing period (YYYY-MM) this notification concerns, when applicable"
+    },
+    "summary": {
+      "type": "object",
+      "description": "Structured disbursement/payout summary stats"
+    },
+    "is_read": {
+      "type": "boolean",
+      "default": false
+    },
+    "read_date": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "recipient_user_id",
+    "type",
+    "title",
+    "body"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "data.recipient_user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "data.recipient_user_id": "{{user.id}}"
+        },
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "data.recipient_user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "data.recipient_user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    }
+  }
+}

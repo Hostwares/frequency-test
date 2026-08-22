@@ -1,0 +1,111 @@
+{
+  "name": "UserBlock",
+  "type": "object",
+  "properties": {
+    "blocker_user_id": {
+      "type": "string",
+      "description": "The user who initiated the block"
+    },
+    "blocked_user_id": {
+      "type": "string",
+      "description": "The user who was blocked"
+    },
+    "blocked_user_name": {
+      "type": "string",
+      "description": "Display name of the blocked user"
+    },
+    "reason": {
+      "type": "string",
+      "enum": [
+        "harassment",
+        "spam",
+        "inappropriate_content",
+        "scam_fraud",
+        "other"
+      ],
+      "description": "Reason for blocking"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether the block is currently active"
+    }
+  },
+  "required": [
+    "blocker_user_id",
+    "blocked_user_id"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "data.blocker_user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "data.blocker_user_id": "{{user.id}}"
+        },
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "data.blocker_user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "data.blocker_user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    }
+  }
+}

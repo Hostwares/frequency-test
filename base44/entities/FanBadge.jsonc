@@ -1,0 +1,181 @@
+{
+  "name": "FanBadge",
+  "type": "object",
+  "properties": {
+    "fan_user_id": {
+      "type": "string",
+      "description": "Reference to User entity"
+    },
+    "badge_type": {
+      "type": "string",
+      "enum": [
+        "early_supporter",
+        "super_fan",
+        "mega_fan",
+        "ultra_fan",
+        "legendary_fan",
+        "referral_champion",
+        "referral_master",
+        "referral_legend",
+        "genre_explorer",
+        "community_builder",
+        "playlist_curator",
+        "event_attendee",
+        "first_supporter",
+        "loyal_patron",
+        "monthly_champion",
+        "original_supporter",
+        "first_listener",
+        "first_wave",
+        "day_one_supporter",
+        "early_believer"
+      ],
+      "description": "Type of badge earned"
+    },
+    "badge_tier": {
+      "type": "string",
+      "enum": [
+        "bronze",
+        "silver",
+        "gold",
+        "platinum",
+        "diamond"
+      ],
+      "description": "Badge tier/level"
+    },
+    "earned_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "song_id": {
+      "type": "string",
+      "description": "If badge is tied to a specific song (e.g. Original Supporter of a Mainstream First track)"
+    },
+    "song_title": {
+      "type": "string",
+      "description": "Song title for song-specific badges"
+    },
+    "artist_profile_id": {
+      "type": "string",
+      "description": "Artist the badge is associated with"
+    },
+    "criteria_met": {
+      "type": "object",
+      "properties": {
+        "total_supported": {
+          "type": "number",
+          "description": "Total amount supported in dollars"
+        },
+        "artists_supported": {
+          "type": "number",
+          "description": "Number of unique artists supported"
+        },
+        "referrals_count": {
+          "type": "number",
+          "description": "Number of successful referrals"
+        },
+        "months_active": {
+          "type": "number",
+          "description": "Number of consecutive months supporting"
+        },
+        "playlists_created": {
+          "type": "number",
+          "description": "Number of playlists created"
+        },
+        "events_attended": {
+          "type": "number",
+          "description": "Number of events attended"
+        }
+      }
+    },
+    "is_displayed": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether to display this badge on profile"
+    },
+    "is_permanent": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether this badge is permanent and can never be removed (e.g. Mainstream First fan badges)"
+    }
+  },
+  "required": [
+    "fan_user_id",
+    "badge_type",
+    "badge_tier",
+    "earned_date"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "data.fan_user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "data.fan_user_id": "{{user.id}}"
+        },
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "data.fan_user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "data.fan_user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    }
+  }
+}

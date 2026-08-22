@@ -1,0 +1,204 @@
+{
+  "name": "EditorialArticle",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Article headline"
+    },
+    "subtitle": {
+      "type": "string",
+      "description": "Subheading or deck below the headline"
+    },
+    "slug": {
+      "type": "string",
+      "description": "URL-safe slug for the article (auto-generated from title)"
+    },
+    "body": {
+      "type": "string",
+      "description": "Full article content in HTML (from rich text editor)"
+    },
+    "excerpt": {
+      "type": "string",
+      "maxLength": 500,
+      "description": "Short summary for cards and SEO"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "artist_feature",
+        "community_story",
+        "interview",
+        "review",
+        "opinion",
+        "news",
+        "behind_the_scenes",
+        "milestone_celebration"
+      ],
+      "default": "artist_feature",
+      "description": "Editorial category"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "submitted",
+        "under_review",
+        "approved",
+        "published",
+        "rejected",
+        "archived"
+      ],
+      "default": "draft",
+      "description": "Current workflow status"
+    },
+    "author_user_id": {
+      "type": "string",
+      "description": "Journalist who wrote the article"
+    },
+    "author_name": {
+      "type": "string"
+    },
+    "author_handle": {
+      "type": "string",
+      "description": "Journalist's byline handle"
+    },
+    "author_avatar": {
+      "type": "string"
+    },
+    "featured_artist_id": {
+      "type": "string",
+      "description": "Primary artist featured in the article"
+    },
+    "featured_artist_name": {
+      "type": "string"
+    },
+    "community_id": {
+      "type": "string",
+      "description": "Related Frequency community"
+    },
+    "community_name": {
+      "type": "string"
+    },
+    "cover_image": {
+      "type": "string",
+      "description": "Hero image URL for the article"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Topic tags for discovery"
+    },
+    "feature_deadline": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Target publication deadline for the feature"
+    },
+    "submitted_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "published_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "reviewed_by": {
+      "type": "string",
+      "description": "Admin who reviewed the article"
+    },
+    "reviewed_by_name": {
+      "type": "string"
+    },
+    "reviewed_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "review_notes": {
+      "type": "string",
+      "description": "Internal notes from the reviewer"
+    },
+    "rejection_reason": {
+      "type": "string",
+      "description": "Reason given when an article is rejected"
+    },
+    "is_featured": {
+      "type": "boolean",
+      "default": false,
+      "description": "Editor's pick — featured on the editorial landing page"
+    },
+    "is_breaking": {
+      "type": "boolean",
+      "default": false,
+      "description": "Breaking news flag"
+    },
+    "view_count": {
+      "type": "number",
+      "default": 0
+    },
+    "like_count": {
+      "type": "number",
+      "default": 0
+    },
+    "share_count": {
+      "type": "number",
+      "default": 0
+    },
+    "reading_time_minutes": {
+      "type": "number",
+      "default": 1,
+      "description": "Estimated reading time"
+    },
+    "seo_title": {
+      "type": "string"
+    },
+    "seo_description": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "title",
+    "body",
+    "category",
+    "author_user_id"
+  ],
+  "rls": {
+    "read": {},
+    "create": {},
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "name": "CommunityVote",
+  "type": "object",
+  "properties": {
+    "voter_user_id": {
+      "type": "string",
+      "description": "ID of the user casting the vote"
+    },
+    "community_id": {
+      "type": "string",
+      "description": "The Frequency community this vote belongs to"
+    },
+    "target_type": {
+      "type": "string",
+      "enum": [
+        "artist",
+        "song"
+      ],
+      "description": "What is being voted on"
+    },
+    "target_id": {
+      "type": "string",
+      "description": "ID of the artist or song being voted on"
+    },
+    "target_name": {
+      "type": "string",
+      "description": "Display name of the target"
+    },
+    "month": {
+      "type": "string",
+      "description": "YYYY-MM — the discovery pool month this vote counts toward"
+    }
+  },
+  "required": [
+    "voter_user_id",
+    "community_id",
+    "target_type",
+    "target_id",
+    "month"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "data.voter_user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "data.voter_user_id": "{{user.id}}"
+        },
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "data.voter_user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "data.voter_user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    }
+  }
+}

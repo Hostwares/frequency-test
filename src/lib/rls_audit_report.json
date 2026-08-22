@@ -1,0 +1,4982 @@
+{
+  "AcademyMember": {
+    "category": "owner_read",
+    "ownerField": "user_id",
+    "rls": {
+      "read": {
+        "$or": [
+          {
+            "data.user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "create": {
+        "$or": [
+          {
+            "data.user_id": "{{user.id}}"
+          },
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "update": {
+        "$or": [
+          {
+            "data.user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "data.user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "AdminPartner": {
+    "category": "owner_read",
+    "ownerField": "user_id",
+    "rls": {
+      "read": {
+        "$or": [
+          {
+            "data.user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "create": {
+        "$or": [
+          {
+            "data.user_id": "{{user.id}}"
+          },
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "update": {
+        "$or": [
+          {
+            "data.user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "data.user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "AdminPartnerEarning": {
+    "category": "owner_read",
+    "ownerField": "user_id",
+    "rls": {
+      "read": {
+        "$or": [
+          {
+            "data.user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "create": {
+        "$or": [
+          {
+            "data.user_id": "{{user.id}}"
+          },
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "update": {
+        "$or": [
+          {
+            "data.user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "data.user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "AirplayReport": {
+    "category": "owner_read",
+    "ownerField": "created_by_id",
+    "rls": {
+      "read": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "create": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "update": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "ArtistMessage": {
+    "category": "public_read",
+    "ownerField": null,
+    "rls": {
+      "read": {},
+      "create": {},
+      "update": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "ArtistPaymentMethod": {
+    "category": "owner_read",
+    "ownerField": "artist_user_id",
+    "rls": {
+      "read": {
+        "$or": [
+          {
+            "data.artist_user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "create": {
+        "$or": [
+          {
+            "data.artist_user_id": "{{user.id}}"
+          },
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "update": {
+        "$or": [
+          {
+            "data.artist_user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "data.artist_user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "ArtistPayout": {
+    "category": "owner_read",
+    "ownerField": "artist_user_id",
+    "rls": {
+      "read": {
+        "$or": [
+          {
+            "data.artist_user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "create": {
+        "$or": [
+          {
+            "data.artist_user_id": "{{user.id}}"
+          },
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "update": {
+        "$or": [
+          {
+            "data.artist_user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "data.artist_user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "ArtistProfile": {
+    "category": "already_secured",
+    "rls": {
+      "read": {},
+      "create": {},
+      "update": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "ArtistSpotlight": {
+    "category": "public_read",
+    "ownerField": null,
+    "rls": {
+      "read": {},
+      "create": {},
+      "update": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "ArtistSubmission": {
+    "category": "owner_read",
+    "ownerField": "artist_user_id",
+    "rls": {
+      "read": {
+        "$or": [
+          {
+            "data.artist_user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "create": {
+        "$or": [
+          {
+            "data.artist_user_id": "{{user.id}}"
+          },
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "update": {
+        "$or": [
+          {
+            "data.artist_user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "data.artist_user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "ArtistVerification": {
+    "category": "owner_read",
+    "ownerField": "user_id",
+    "rls": {
+      "read": {
+        "$or": [
+          {
+            "data.user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "create": {
+        "$or": [
+          {
+            "data.user_id": "{{user.id}}"
+          },
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "update": {
+        "$or": [
+          {
+            "data.user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "data.user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "AuditLog": {
+    "category": "admin_only",
+    "ownerField": null,
+    "rls": {
+      "read": {
+        "$or": [
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "create": {
+        "$or": [
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "update": {
+        "$or": [
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "AwardsCategory": {
+    "category": "public_read",
+    "ownerField": null,
+    "rls": {
+      "read": {},
+      "create": {},
+      "update": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "AwardsNominee": {
+    "category": "public_read",
+    "ownerField": null,
+    "rls": {
+      "read": {},
+      "create": {},
+      "update": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "AwardsVote": {
+    "category": "owner_read",
+    "ownerField": "voter_user_id",
+    "rls": {
+      "read": {
+        "$or": [
+          {
+            "data.voter_user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "create": {
+        "$or": [
+          {
+            "data.voter_user_id": "{{user.id}}"
+          },
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "update": {
+        "$or": [
+          {
+            "data.voter_user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "data.voter_user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "BetaConfiguration": {
+    "category": "admin_only",
+    "ownerField": null,
+    "rls": {
+      "read": {
+        "$or": [
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "create": {
+        "$or": [
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "update": {
+        "$or": [
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "BetaFeedback": {
+    "category": "owner_read",
+    "ownerField": "user_id",
+    "rls": {
+      "read": {
+        "$or": [
+          {
+            "data.user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "create": {
+        "$or": [
+          {
+            "data.user_id": "{{user.id}}"
+          },
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "update": {
+        "$or": [
+          {
+            "data.user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "data.user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "CollaboratorEarning": {
+    "category": "owner_read",
+    "ownerField": "collaborator_user_id",
+    "rls": {
+      "read": {
+        "$or": [
+          {
+            "data.collaborator_user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "create": {
+        "$or": [
+          {
+            "data.collaborator_user_id": "{{user.id}}"
+          },
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "update": {
+        "$or": [
+          {
+            "data.collaborator_user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "data.collaborator_user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "CommunityAnnouncement": {
+    "category": "public_read",
+    "ownerField": null,
+    "rls": {
+      "read": {},
+      "create": {},
+      "update": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "CommunityMessage": {
+    "category": "public_read",
+    "ownerField": null,
+    "rls": {
+      "read": {},
+      "create": {},
+      "update": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "CommunityMilestone": {
+    "category": "public_read",
+    "ownerField": null,
+    "rls": {
+      "read": {},
+      "create": {},
+      "update": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "CommunityPhoto": {
+    "category": "public_read",
+    "ownerField": null,
+    "rls": {
+      "read": {},
+      "create": {},
+      "update": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "CommunityPoll": {
+    "category": "public_read",
+    "ownerField": null,
+    "rls": {
+      "read": {},
+      "create": {},
+      "update": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "CommunityVote": {
+    "category": "owner_read",
+    "ownerField": "voter_user_id",
+    "rls": {
+      "read": {
+        "$or": [
+          {
+            "data.voter_user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "create": {
+        "$or": [
+          {
+            "data.voter_user_id": "{{user.id}}"
+          },
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "update": {
+        "$or": [
+          {
+            "data.voter_user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "data.voter_user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "CouncilPost": {
+    "category": "owner_read",
+    "ownerField": "created_by_id",
+    "rls": {
+      "read": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "create": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "update": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "DMCANotice": {
+    "category": "owner_read",
+    "ownerField": "created_by_id",
+    "rls": {
+      "read": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "create": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "update": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "DirectMessage": {
+    "category": "owner_read",
+    "ownerField": "sender_user_id|recipient_user_id",
+    "rls": {
+      "read": {
+        "$or": [
+          {
+            "data.sender_user_id": "{{user.id}}"
+          },
+          {
+            "data.recipient_user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "create": {
+        "$or": [
+          {
+            "data.sender_user_id": "{{user.id}}"
+          },
+          {
+            "data.recipient_user_id": "{{user.id}}"
+          },
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "update": {
+        "$or": [
+          {
+            "data.sender_user_id": "{{user.id}}"
+          },
+          {
+            "data.recipient_user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "data.sender_user_id": "{{user.id}}"
+          },
+          {
+            "data.recipient_user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "DiscoveryPartner": {
+    "category": "public_read",
+    "ownerField": null,
+    "rls": {
+      "read": {},
+      "create": {},
+      "update": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "DiscoveryRecord": {
+    "category": "owner_read",
+    "ownerField": "created_by_id",
+    "rls": {
+      "read": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "create": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "update": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "EditorialArticle": {
+    "category": "public_read",
+    "ownerField": null,
+    "rls": {
+      "read": {},
+      "create": {},
+      "update": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "Event": {
+    "category": "public_read",
+    "ownerField": null,
+    "rls": {
+      "read": {},
+      "create": {},
+      "update": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "EventCheckIn": {
+    "category": "owner_read",
+    "ownerField": "user_id",
+    "rls": {
+      "read": {
+        "$or": [
+          {
+            "data.user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "create": {
+        "$or": [
+          {
+            "data.user_id": "{{user.id}}"
+          },
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "update": {
+        "$or": [
+          {
+            "data.user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "data.user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "EventRSVP": {
+    "category": "owner_read",
+    "ownerField": "user_id",
+    "rls": {
+      "read": {
+        "$or": [
+          {
+            "data.user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "create": {
+        "$or": [
+          {
+            "data.user_id": "{{user.id}}"
+          },
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "update": {
+        "$or": [
+          {
+            "data.user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "data.user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "EventSeat": {
+    "category": "public_read",
+    "ownerField": null,
+    "rls": {
+      "read": {},
+      "create": {},
+      "update": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "FanBadge": {
+    "category": "owner_read",
+    "ownerField": "fan_user_id",
+    "rls": {
+      "read": {
+        "$or": [
+          {
+            "data.fan_user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "create": {
+        "$or": [
+          {
+            "data.fan_user_id": "{{user.id}}"
+          },
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "update": {
+        "$or": [
+          {
+            "data.fan_user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "data.fan_user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "FanCouncil": {
+    "category": "public_read",
+    "ownerField": null,
+    "rls": {
+      "read": {},
+      "create": {},
+      "update": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "FanNotification": {
+    "category": "owner_read",
+    "ownerField": "fan_user_id",
+    "rls": {
+      "read": {
+        "$or": [
+          {
+            "data.fan_user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "create": {
+        "$or": [
+          {
+            "data.fan_user_id": "{{user.id}}"
+          },
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "update": {
+        "$or": [
+          {
+            "data.fan_user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "data.fan_user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "FrequencyCommunity": {
+    "category": "public_read",
+    "ownerField": null,
+    "rls": {
+      "read": {},
+      "create": {},
+      "update": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "GovernorAccessCode": {
+    "category": "admin_only",
+    "ownerField": null,
+    "rls": {
+      "read": {
+        "$or": [
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "create": {
+        "$or": [
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "update": {
+        "$or": [
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "HallOfDiscoveryEntry": {
+    "category": "public_read",
+    "ownerField": null,
+    "rls": {
+      "read": {},
+      "create": {},
+      "update": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "HeroBanner": {
+    "category": "public_read",
+    "ownerField": null,
+    "rls": {
+      "read": {},
+      "create": {},
+      "update": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "HeroBannerImpression": {
+    "category": "admin_only",
+    "ownerField": null,
+    "rls": {
+      "read": {
+        "$or": [
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "create": {
+        "$or": [
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "update": {
+        "$or": [
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "LaunchReadinessItem": {
+    "category": "admin_only",
+    "ownerField": null,
+    "rls": {
+      "read": {
+        "$or": [
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "create": {
+        "$or": [
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "update": {
+        "$or": [
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "ListeningHistory": {
+    "category": "owner_read",
+    "ownerField": "user_id",
+    "rls": {
+      "read": {
+        "$or": [
+          {
+            "data.user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "create": {
+        "$or": [
+          {
+            "data.user_id": "{{user.id}}"
+          },
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "update": {
+        "$or": [
+          {
+            "data.user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "data.user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "MarketplaceItem": {
+    "category": "public_read",
+    "ownerField": null,
+    "rls": {
+      "read": {},
+      "create": {},
+      "update": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "ModerationAction": {
+    "category": "admin_only",
+    "ownerField": null,
+    "rls": {
+      "read": {
+        "$or": [
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "create": {
+        "$or": [
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "update": {
+        "$or": [
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "NetworkNotification": {
+    "category": "owner_read",
+    "ownerField": "created_by_id",
+    "rls": {
+      "read": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "create": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "update": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "OnboardingProgress": {
+    "category": "owner_read",
+    "ownerField": "user_id",
+    "rls": {
+      "read": {
+        "$or": [
+          {
+            "data.user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "create": {
+        "$or": [
+          {
+            "data.user_id": "{{user.id}}"
+          },
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "update": {
+        "$or": [
+          {
+            "data.user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "data.user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "OpsNotification": {
+    "category": "owner_read",
+    "ownerField": "recipient_user_id",
+    "rls": {
+      "read": {
+        "$or": [
+          {
+            "data.recipient_user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "create": {
+        "$or": [
+          {
+            "data.recipient_user_id": "{{user.id}}"
+          },
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "update": {
+        "$or": [
+          {
+            "data.recipient_user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "data.recipient_user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "Order": {
+    "category": "already_secured",
+    "rls": {
+      "read": {
+        "$or": [
+          {
+            "data.fan_user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "create": {
+        "$or": [
+          {
+            "data.fan_user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "update": {
+        "$or": [
+          {
+            "data.fan_user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "data.fan_user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "PartnerFollow": {
+    "category": "owner_read",
+    "ownerField": "follower_user_id",
+    "rls": {
+      "read": {
+        "$or": [
+          {
+            "data.follower_user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "create": {
+        "$or": [
+          {
+            "data.follower_user_id": "{{user.id}}"
+          },
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "update": {
+        "$or": [
+          {
+            "data.follower_user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "data.follower_user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "PartnerGratitudePayment": {
+    "category": "owner_read",
+    "ownerField": "created_by_id",
+    "rls": {
+      "read": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "create": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "update": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "PaymentGateway": {
+    "category": "admin_only",
+    "ownerField": null,
+    "rls": {
+      "read": {
+        "$or": [
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "create": {
+        "$or": [
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "update": {
+        "$or": [
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "PlatformExpense": {
+    "category": "admin_only",
+    "ownerField": null,
+    "rls": {
+      "read": {
+        "$or": [
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "create": {
+        "$or": [
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "update": {
+        "$or": [
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "PlatformSetting": {
+    "category": "admin_only",
+    "ownerField": null,
+    "rls": {
+      "read": {
+        "$or": [
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "create": {
+        "$or": [
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "update": {
+        "$or": [
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "Playlist": {
+    "category": "already_secured",
+    "rls": {
+      "read": {},
+      "create": {},
+      "update": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "data.owner_user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "data.owner_user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "Product": {
+    "category": "public_read",
+    "ownerField": null,
+    "rls": {
+      "read": {},
+      "create": {},
+      "update": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "RadioDownload": {
+    "category": "owner_read",
+    "ownerField": "created_by_id",
+    "rls": {
+      "read": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "create": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "update": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "RadioMessage": {
+    "category": "owner_read",
+    "ownerField": "sender_user_id|recipient_user_id",
+    "rls": {
+      "read": {
+        "$or": [
+          {
+            "data.sender_user_id": "{{user.id}}"
+          },
+          {
+            "data.recipient_user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "create": {
+        "$or": [
+          {
+            "data.sender_user_id": "{{user.id}}"
+          },
+          {
+            "data.recipient_user_id": "{{user.id}}"
+          },
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "update": {
+        "$or": [
+          {
+            "data.sender_user_id": "{{user.id}}"
+          },
+          {
+            "data.recipient_user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "data.sender_user_id": "{{user.id}}"
+          },
+          {
+            "data.recipient_user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "RadioProgrammer": {
+    "category": "owner_read",
+    "ownerField": "user_id",
+    "rls": {
+      "read": {
+        "$or": [
+          {
+            "data.user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "create": {
+        "$or": [
+          {
+            "data.user_id": "{{user.id}}"
+          },
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "update": {
+        "$or": [
+          {
+            "data.user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "data.user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "RadioStation": {
+    "category": "public_read",
+    "ownerField": null,
+    "rls": {
+      "read": {},
+      "create": {},
+      "update": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "Referral": {
+    "category": "owner_read",
+    "ownerField": "created_by_id",
+    "rls": {
+      "read": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "create": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "update": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "Release": {
+    "category": "public_read",
+    "ownerField": null,
+    "rls": {
+      "read": {},
+      "create": {},
+      "update": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "RevenueSplit": {
+    "category": "owner_read",
+    "ownerField": "artist_user_id",
+    "rls": {
+      "read": {
+        "$or": [
+          {
+            "data.artist_user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "create": {
+        "$or": [
+          {
+            "data.artist_user_id": "{{user.id}}"
+          },
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "update": {
+        "$or": [
+          {
+            "data.artist_user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "data.artist_user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "RightsClaim": {
+    "category": "owner_read",
+    "ownerField": "created_by_id",
+    "rls": {
+      "read": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "create": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "update": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "SecurityEvent": {
+    "category": "admin_only",
+    "ownerField": null,
+    "rls": {
+      "read": {
+        "$or": [
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "create": {
+        "$or": [
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "update": {
+        "$or": [
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "Song": {
+    "category": "public_read",
+    "ownerField": null,
+    "rls": {
+      "read": {},
+      "create": {},
+      "update": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "SongRating": {
+    "category": "owner_read",
+    "ownerField": "fan_user_id",
+    "rls": {
+      "read": {
+        "$or": [
+          {
+            "data.fan_user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "create": {
+        "$or": [
+          {
+            "data.fan_user_id": "{{user.id}}"
+          },
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "update": {
+        "$or": [
+          {
+            "data.fan_user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "data.fan_user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "SplitAuditLog": {
+    "category": "admin_only",
+    "ownerField": null,
+    "rls": {
+      "read": {
+        "$or": [
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "create": {
+        "$or": [
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "update": {
+        "$or": [
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "SplitSheet": {
+    "category": "owner_read",
+    "ownerField": "owner_user_id",
+    "rls": {
+      "read": {
+        "$or": [
+          {
+            "data.owner_user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "create": {
+        "$or": [
+          {
+            "data.owner_user_id": "{{user.id}}"
+          },
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "update": {
+        "$or": [
+          {
+            "data.owner_user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "data.owner_user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "StoreIntegration": {
+    "category": "admin_only",
+    "ownerField": null,
+    "rls": {
+      "read": {
+        "$or": [
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "create": {
+        "$or": [
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "update": {
+        "$or": [
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "SubscriptionPlan": {
+    "category": "public_read",
+    "ownerField": null,
+    "rls": {
+      "read": {},
+      "create": {},
+      "update": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "SupportAllocation": {
+    "category": "owner_read",
+    "ownerField": "fan_user_id",
+    "rls": {
+      "read": {
+        "$or": [
+          {
+            "data.fan_user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "create": {
+        "$or": [
+          {
+            "data.fan_user_id": "{{user.id}}"
+          },
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "update": {
+        "$or": [
+          {
+            "data.fan_user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "data.fan_user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "SupportGoal": {
+    "category": "owner_read",
+    "ownerField": "user_id",
+    "rls": {
+      "read": {
+        "$or": [
+          {
+            "data.user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "create": {
+        "$or": [
+          {
+            "data.user_id": "{{user.id}}"
+          },
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "update": {
+        "$or": [
+          {
+            "data.user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "data.user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "TicketTier": {
+    "category": "public_read",
+    "ownerField": null,
+    "rls": {
+      "read": {},
+      "create": {},
+      "update": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "User": {
+    "category": "already_secured"
+  },
+  "UserBlock": {
+    "category": "owner_read",
+    "ownerField": "blocker_user_id",
+    "rls": {
+      "read": {
+        "$or": [
+          {
+            "data.blocker_user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "create": {
+        "$or": [
+          {
+            "data.blocker_user_id": "{{user.id}}"
+          },
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "update": {
+        "$or": [
+          {
+            "data.blocker_user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "data.blocker_user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "UserReport": {
+    "category": "owner_read",
+    "ownerField": "reporter_user_id",
+    "rls": {
+      "read": {
+        "$or": [
+          {
+            "data.reporter_user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "create": {
+        "$or": [
+          {
+            "data.reporter_user_id": "{{user.id}}"
+          },
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "update": {
+        "$or": [
+          {
+            "data.reporter_user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "data.reporter_user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "UserSubscription": {
+    "category": "owner_read",
+    "ownerField": "user_id",
+    "rls": {
+      "read": {
+        "$or": [
+          {
+            "data.user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "create": {
+        "$or": [
+          {
+            "data.user_id": "{{user.id}}"
+          },
+          {
+            "created_by_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "update": {
+        "$or": [
+          {
+            "data.user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "data.user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "WalletTransaction": {
+    "category": "already_secured",
+    "rls": {
+      "read": {
+        "$or": [
+          {
+            "data.user_id": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "create": {
+        "$or": [
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "update": {
+        "$or": [
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "$or": [
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          },
+          {
+            "user_condition": {
+              "role": "master_admin"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

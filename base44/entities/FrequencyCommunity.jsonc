@@ -1,0 +1,105 @@
+{
+  "name": "FrequencyCommunity",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Community name e.g. Southern Rock, Americana"
+    },
+    "description": {
+      "type": "string"
+    },
+    "cover_image": {
+      "type": "string"
+    },
+    "genre": {
+      "type": "string"
+    },
+    "member_count": {
+      "type": "number",
+      "default": 0
+    },
+    "artist_count": {
+      "type": "number",
+      "default": 0
+    },
+    "manager_user_id": {
+      "type": "string",
+      "description": "Community manager user ID"
+    },
+    "featured_artist_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "community_fund": {
+      "type": "number",
+      "default": 0
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "resonance_score": {
+      "type": "number",
+      "default": 0,
+      "description": "Aggregate community Resonance Score — sum of member artists' resonance scores"
+    },
+    "resonance_milestones_notified": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": [],
+      "description": "Resonance Score milestone thresholds already notified to admins (e.g. 'resonance_1000')"
+    }
+  },
+  "required": [
+    "name"
+  ],
+  "rls": {
+    "read": {},
+    "create": {},
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,191 @@
+{
+  "name": "FanNotification",
+  "type": "object",
+  "properties": {
+    "fan_user_id": {
+      "type": "string",
+      "description": "The fan who receives this notification"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "new_referral_supporter",
+        "artist_gained_support",
+        "spotlight_alert",
+        "council_meeting_reminder",
+        "new_music",
+        "new_event",
+        "support_goal_update",
+        "fan_milestone",
+        "quarterly_update",
+        "playlist_paused"
+      ],
+      "description": "Notification type"
+    },
+    "title": {
+      "type": "string"
+    },
+    "body": {
+      "type": "string"
+    },
+    "artist_name": {
+      "type": "string"
+    },
+    "artist_profile_id": {
+      "type": "string"
+    },
+    "discovery_partner_id": {
+      "type": "string",
+      "description": "The Discovery Partner who created the spotlight"
+    },
+    "spotlight_id": {
+      "type": "string",
+      "description": "Reference to the ArtistSpotlight that triggered this"
+    },
+    "song_id": {
+      "type": "string",
+      "description": "Reference to the Song that triggered a new_music notification"
+    },
+    "song_title": {
+      "type": "string"
+    },
+    "event_id": {
+      "type": "string",
+      "description": "Reference to the Event that triggered a new_event notification"
+    },
+    "event_title": {
+      "type": "string"
+    },
+    "event_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Date of the event for new_event notifications"
+    },
+    "council_id": {
+      "type": "string",
+      "description": "Reference to the FanCouncil for meeting reminders"
+    },
+    "meeting_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Date/time of the council meeting"
+    },
+    "support_goal_id": {
+      "type": "string",
+      "description": "Reference to the SupportGoal that triggered a support_goal_update notification"
+    },
+    "support_goal_title": {
+      "type": "string"
+    },
+    "support_goal_status": {
+      "type": "string",
+      "description": "The new status of the support goal (funded, completed, in_progress, etc.)"
+    },
+    "milestone_type": {
+      "type": "string",
+      "description": "Identifier for the specific milestone reached (e.g. first_support, total_100, artists_5)"
+    },
+    "quarterly_period": {
+      "type": "string",
+      "description": "The quarter this update covers (e.g. Q3-2026)"
+    },
+    "paused_playlist_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "IDs of funded playlists paused due to a tier downgrade (playlist_paused notifications)"
+    },
+    "new_plan_code": {
+      "type": "string",
+      "description": "The new plan code after a downgrade (playlist_paused notifications)"
+    },
+    "new_funded_network_limit": {
+      "type": "number",
+      "description": "The active funded network limit for the new tier (playlist_paused notifications)"
+    },
+    "is_read": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "required": [
+    "fan_user_id",
+    "type",
+    "title",
+    "body"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "data.fan_user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "data.fan_user_id": "{{user.id}}"
+        },
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "data.fan_user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "data.fan_user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    }
+  }
+}

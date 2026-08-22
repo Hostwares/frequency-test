@@ -1,0 +1,106 @@
+{
+  "name": "EmergencyRecoveryAccess",
+  "type": "object",
+  "properties": {
+    "master_admin_user_id": {
+      "type": "string",
+      "description": "The master admin user this recovery access belongs to"
+    },
+    "master_admin_email": {
+      "type": "string",
+      "description": "Email of the master admin for identification"
+    },
+    "recovery_code_hash": {
+      "type": "string",
+      "description": "SHA-256 hash of the recovery code. Never store plaintext."
+    },
+    "backup_verification_email": {
+      "type": "string",
+      "description": "Secondary email for the verification step. Distinct from the master admin's login email to ensure the recovery verification is separate from normal login."
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether this recovery access is active and usable"
+    },
+    "is_revoked": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether this recovery access has been permanently revoked"
+    },
+    "revoked_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "revoked_reason": {
+      "type": "string"
+    },
+    "use_count": {
+      "type": "number",
+      "default": 0,
+      "description": "Total number of times this recovery access has been used"
+    },
+    "last_used_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "last_used_ip": {
+      "type": "string",
+      "description": "IP address of the last successful recovery use"
+    },
+    "created_by_setup": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether this was created during initial master admin setup"
+    }
+  },
+  "required": [
+    "master_admin_user_id",
+    "master_admin_email",
+    "recovery_code_hash",
+    "backup_verification_email"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "data.master_admin_user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "data.master_admin_user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "data.master_admin_user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "master_admin"
+      }
+    }
+  }
+}

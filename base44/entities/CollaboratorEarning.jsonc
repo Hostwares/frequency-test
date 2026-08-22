@@ -1,0 +1,250 @@
+{
+  "name": "CollaboratorEarning",
+  "type": "object",
+  "properties": {
+    "split_id": {
+      "type": "string",
+      "description": "Reference to the RevenueSplit that generated this earning"
+    },
+    "split_name": {
+      "type": "string"
+    },
+    "artist_profile_id": {
+      "type": "string",
+      "description": "Reference to ArtistProfile"
+    },
+    "artist_name": {
+      "type": "string"
+    },
+    "collaborator_user_id": {
+      "type": "string",
+      "description": "Platform User ID if collaborator is registered"
+    },
+    "collaborator_name": {
+      "type": "string"
+    },
+    "collaborator_email": {
+      "type": "string"
+    },
+    "collaborator_role": {
+      "type": "string",
+      "enum": [
+        "lead_vocal",
+        "guitar",
+        "bass",
+        "drums",
+        "keyboard",
+        "producer",
+        "songwriter",
+        "composer",
+        "mixer",
+        "engineer",
+        "mastering_engineer",
+        "featured_artist",
+        "publisher",
+        "manager",
+        "business_partner",
+        "marketing",
+        "other"
+      ]
+    },
+    "revenue_source": {
+      "type": "string",
+      "enum": [
+        "fan_support",
+        "direct_support",
+        "playlist_revenue",
+        "network_revenue",
+        "community_rewards",
+        "discovery_partner_bonus",
+        "merchandise",
+        "ticket_sales",
+        "marketplace",
+        "fan_tips",
+        "licensing",
+        "artist_disbursement",
+        "other"
+      ],
+      "description": "The platform revenue source that generated this earning. 'artist_disbursement' = a post-disbursement split of an amount the artist already received from the platform."
+    },
+    "gross_revenue": {
+      "type": "number",
+      "default": 0,
+      "description": "Total gross revenue before platform fees"
+    },
+    "platform_fee": {
+      "type": "number",
+      "default": 0,
+      "description": "Platform operations fee deducted"
+    },
+    "net_revenue": {
+      "type": "number",
+      "default": 0,
+      "description": "Net revenue after platform fee"
+    },
+    "revenue_percentage": {
+      "type": "number",
+      "default": 0,
+      "description": "Collaborator's percentage of net revenue"
+    },
+    "collaborator_amount": {
+      "type": "number",
+      "default": 0,
+      "description": "Final amount owed to this collaborator"
+    },
+    "release_id": {
+      "type": "string"
+    },
+    "release_name": {
+      "type": "string"
+    },
+    "song_id": {
+      "type": "string"
+    },
+    "song_name": {
+      "type": "string"
+    },
+    "playlist_id": {
+      "type": "string"
+    },
+    "playlist_name": {
+      "type": "string"
+    },
+    "community_id": {
+      "type": "string"
+    },
+    "community_name": {
+      "type": "string"
+    },
+    "payment_status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "processing",
+        "paid",
+        "failed"
+      ],
+      "default": "pending"
+    },
+    "payment_method": {
+      "type": "string",
+      "enum": [
+        "frequency_wallet",
+        "stripe_connect",
+        "paypal",
+        "ach",
+        "bank_transfer",
+        "manual"
+      ],
+      "default": "frequency_wallet"
+    },
+    "payment_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "transaction_id": {
+      "type": "string"
+    },
+    "earning_period_month": {
+      "type": "number",
+      "description": "1-12 month of the earning period"
+    },
+    "earning_period_year": {
+      "type": "number"
+    },
+    "processed_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "payout_notification_sent": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether the payout-paid email notification has been sent to this collaborator"
+    },
+    "payout_notification_sent_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the payout-paid email notification was sent"
+    }
+  },
+  "required": [
+    "split_id",
+    "artist_profile_id",
+    "collaborator_name",
+    "revenue_source",
+    "collaborator_amount"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "data.collaborator_user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "data.collaborator_user_id": "{{user.id}}"
+        },
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "data.collaborator_user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "data.collaborator_user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    }
+  }
+}

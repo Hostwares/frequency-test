@@ -1,0 +1,138 @@
+{
+  "name": "RadioVerificationEvidence",
+  "type": "object",
+  "properties": {
+    "station_id": {
+      "type": "string",
+      "description": "Reference to RadioStation application this evidence supports."
+    },
+    "evidence_type": {
+      "type": "string",
+      "enum": [
+        "regulator_match",
+        "official_website",
+        "email_domain_match",
+        "streaming_activity",
+        "public_listing",
+        "social_identity",
+        "document",
+        "staff_directory",
+        "program_schedule",
+        "app_store_listing"
+      ],
+      "description": "Category of verification evidence gathered by AI or submitted by applicant."
+    },
+    "source": {
+      "type": "string",
+      "description": "Where the evidence came from (e.g. FCC, station website, TuneIn, LinkedIn)."
+    },
+    "public_url": {
+      "type": "string",
+      "description": "Public-facing URL the evidence was gathered from, when applicable."
+    },
+    "match_result": {
+      "type": "string",
+      "enum": [
+        "matched",
+        "partial",
+        "no_match",
+        "failed",
+        "not_checked"
+      ],
+      "default": "not_checked"
+    },
+    "confidence_score": {
+      "type": "number",
+      "default": 0,
+      "description": "Points contributed toward the verification_score (0-100 total across evidence)."
+    },
+    "ai_notes": {
+      "type": "string",
+      "description": "AI explanation for this evidence item."
+    },
+    "reviewer_notes": {
+      "type": "string",
+      "description": "Human reviewer notes for this evidence item."
+    },
+    "verified_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "expiration_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When this evidence item should be rechecked."
+    },
+    "is_document": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether this evidence is an uploaded sensitive document (not shown publicly)."
+    },
+    "file_url": {
+      "type": "string",
+      "description": "Stored document URL when is_document is true. Sensitive \u2014 never shown publicly."
+    }
+  },
+  "required": [
+    "station_id",
+    "evidence_type"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    }
+  }
+}

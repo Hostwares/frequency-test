@@ -1,0 +1,152 @@
+{
+  "name": "Release",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Release title"
+    },
+    "artist_profile_id": {
+      "type": "string",
+      "description": "Reference to ArtistProfile"
+    },
+    "artist_name": {
+      "type": "string"
+    },
+    "release_type": {
+      "type": "string",
+      "enum": [
+        "single",
+        "ep",
+        "album",
+        "deluxe_edition",
+        "compilation",
+        "mixtape",
+        "live_album"
+      ],
+      "description": "Type of release"
+    },
+    "parent_release_id": {
+      "type": "string",
+      "description": "For deluxe editions or compilations — references the original release"
+    },
+    "release_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "cover_art": {
+      "type": "string",
+      "description": "Cover artwork URL"
+    },
+    "description": {
+      "type": "string",
+      "description": "Release description or liner notes"
+    },
+    "upc": {
+      "type": "string",
+      "description": "Universal Product Code"
+    },
+    "catalog_number": {
+      "type": "string",
+      "description": "Label catalog number"
+    },
+    "label": {
+      "type": "string",
+      "description": "Record label name"
+    },
+    "copyright_year": {
+      "type": "number",
+      "description": "Copyright year (P-line)"
+    },
+    "copyright_holder": {
+      "type": "string",
+      "description": "Copyright holder (P-line owner)"
+    },
+    "genre": {
+      "type": "string"
+    },
+    "sub_genres": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "track_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Ordered list of Song IDs in this release"
+    },
+    "track_count": {
+      "type": "number",
+      "default": 0
+    },
+    "total_duration_seconds": {
+      "type": "number",
+      "default": 0
+    },
+    "is_explicit": {
+      "type": "boolean",
+      "default": false
+    },
+    "is_published": {
+      "type": "boolean",
+      "default": false
+    },
+    "is_featured": {
+      "type": "boolean",
+      "default": false
+    },
+    "territory_restrictions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "title",
+    "artist_profile_id",
+    "artist_name",
+    "release_type"
+  ],
+  "rls": {
+    "read": {},
+    "create": {},
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    }
+  }
+}

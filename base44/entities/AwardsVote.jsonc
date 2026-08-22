@@ -1,0 +1,132 @@
+{
+  "name": "AwardsVote",
+  "type": "object",
+  "properties": {
+    "voter_user_id": {
+      "type": "string",
+      "description": "Academy member casting the vote"
+    },
+    "voter_name": {
+      "type": "string"
+    },
+    "category_id": {
+      "type": "string",
+      "description": "Reference to AwardsCategory"
+    },
+    "category_name": {
+      "type": "string"
+    },
+    "nominee_id": {
+      "type": "string",
+      "description": "Reference to AwardsNominee"
+    },
+    "nominee_name": {
+      "type": "string"
+    },
+    "vote_rank": {
+      "type": "number",
+      "description": "Rank for ranked-choice voting (1 = first choice)"
+    },
+    "voting_phase": {
+      "type": "string",
+      "enum": [
+        "nomination",
+        "final_voting"
+      ],
+      "description": "Which voting phase this vote was cast in"
+    },
+    "voting_cycle": {
+      "type": "number",
+      "description": "Awards cycle year"
+    },
+    "voted_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "conflict_disclosed": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether the voter disclosed a conflict of interest for this category"
+    }
+  },
+  "required": [
+    "voter_user_id",
+    "category_id",
+    "nominee_id",
+    "voting_phase",
+    "voting_cycle"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "data.voter_user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "data.voter_user_id": "{{user.id}}"
+        },
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "data.voter_user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "data.voter_user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    }
+  }
+}

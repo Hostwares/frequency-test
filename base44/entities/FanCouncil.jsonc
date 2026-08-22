@@ -1,0 +1,127 @@
+{
+  "name": "FanCouncil",
+  "type": "object",
+  "properties": {
+    "artist_profile_id": {
+      "type": "string",
+      "description": "The artist who owns this council"
+    },
+    "artist_name": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string",
+      "description": "Council name, e.g. 'Inner Circle'"
+    },
+    "description": {
+      "type": "string"
+    },
+    "member_fan_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": [],
+      "description": "Fan user IDs who are members"
+    },
+    "invited_fan_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": [],
+      "description": "Fan user IDs who have been invited but not yet accepted"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true
+    },
+    "scheduled_meetings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "duration_minutes": {
+            "type": "number",
+            "default": 60
+          },
+          "is_virtual": {
+            "type": "boolean",
+            "default": true
+          },
+          "meeting_link": {
+            "type": "string"
+          },
+          "calendar_event_id": {
+            "type": "string"
+          },
+          "reminders_sent": {
+            "type": "boolean",
+            "default": false
+          },
+          "created_date": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "default": []
+    }
+  },
+  "required": [
+    "artist_profile_id",
+    "artist_name",
+    "name"
+  ],
+  "rls": {
+    "read": {},
+    "create": {},
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,116 @@
+{
+  "name": "PlatformExpense",
+  "type": "object",
+  "properties": {
+    "description": {
+      "type": "string",
+      "description": "What the expense was for"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "infrastructure",
+        "payroll",
+        "marketing",
+        "legal",
+        "software",
+        "office",
+        "taxes",
+        "other"
+      ],
+      "default": "other",
+      "description": "Expense category"
+    },
+    "amount": {
+      "type": "number",
+      "description": "Expense amount in USD"
+    },
+    "month": {
+      "type": "string",
+      "description": "YYYY-MM format for the period this expense applies to"
+    },
+    "expense_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date the expense was incurred"
+    },
+    "entered_by_user_id": {
+      "type": "string",
+      "description": "Master Admin who entered this expense"
+    },
+    "entered_by_name": {
+      "type": "string"
+    },
+    "is_recurring": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether this is a recurring monthly expense"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "description",
+    "amount",
+    "month"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    }
+  }
+}

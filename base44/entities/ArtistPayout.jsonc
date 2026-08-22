@@ -1,0 +1,173 @@
+{
+  "name": "ArtistPayout",
+  "type": "object",
+  "properties": {
+    "artist_profile_id": {
+      "type": "string",
+      "description": "Reference to ArtistProfile"
+    },
+    "artist_user_id": {
+      "type": "string",
+      "description": "Reference to User entity"
+    },
+    "artist_name": {
+      "type": "string"
+    },
+    "amount": {
+      "type": "number",
+      "description": "Payout amount in dollars"
+    },
+    "payout_type": {
+      "type": "string",
+      "enum": [
+        "monthly",
+        "instant",
+        "manual"
+      ],
+      "default": "monthly"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "processing",
+        "completed",
+        "failed"
+      ],
+      "default": "pending"
+    },
+    "payment_provider": {
+      "type": "string",
+      "enum": [
+        "stripe",
+        "paypal",
+        "wix_payments",
+        "bank_transfer",
+        "zelle"
+      ]
+    },
+    "payout_email": {
+      "type": "string",
+      "description": "Email or mobile number where payout is sent (e.g. Zelle email/mobile)"
+    },
+    "transaction_id": {
+      "type": "string",
+      "description": "External payment transaction ID"
+    },
+    "period_start": {
+      "type": "string",
+      "format": "date",
+      "description": "Start date of payout period"
+    },
+    "period_end": {
+      "type": "string",
+      "format": "date",
+      "description": "End date of payout period"
+    },
+    "orders_count": {
+      "type": "number",
+      "description": "Number of orders this payout covers"
+    },
+    "platform_fee": {
+      "type": "number",
+      "description": "Platform fee deducted"
+    },
+    "collaborator_split_applied": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether the post-disbursement collaborator split has been applied to this payout. Only true after the artist's received amount was split to their configured collaborators (or the payout had no splittable amount). Prevents double-splitting on re-runs."
+    },
+    "collaborator_split_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the post-disbursement collaborator split was applied"
+    },
+    "notes": {
+      "type": "string"
+    },
+    "processed_date": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "artist_profile_id",
+    "artist_user_id",
+    "amount",
+    "payment_provider",
+    "payout_email"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "data.artist_user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "data.artist_user_id": "{{user.id}}"
+        },
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "data.artist_user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "data.artist_user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    }
+  }
+}

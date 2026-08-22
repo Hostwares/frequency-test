@@ -1,0 +1,112 @@
+{
+  "name": "PlatformSetting",
+  "type": "object",
+  "properties": {
+    "setting_key": {
+      "type": "string",
+      "description": "Unique key for the setting (e.g. 'platform_fee_percentage', 'min_platform_fee', 'max_platform_fee')"
+    },
+    "setting_value": {
+      "type": "string",
+      "description": "Value stored as string, parsed by consuming code"
+    },
+    "setting_type": {
+      "type": "string",
+      "enum": [
+        "number",
+        "string",
+        "boolean",
+        "json"
+      ],
+      "default": "string"
+    },
+    "description": {
+      "type": "string",
+      "description": "Human-readable description of the setting"
+    },
+    "default_value": {
+      "type": "string"
+    },
+    "min_value": {
+      "type": "number",
+      "description": "Minimum allowed value for numeric settings"
+    },
+    "max_value": {
+      "type": "number",
+      "description": "Maximum allowed value for numeric settings"
+    },
+    "updated_by_user_id": {
+      "type": "string"
+    },
+    "updated_by_name": {
+      "type": "string"
+    },
+    "requires_notification": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether changing this setting requires notifying existing subscribers"
+    }
+  },
+  "required": [
+    "setting_key",
+    "setting_value"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    }
+  }
+}

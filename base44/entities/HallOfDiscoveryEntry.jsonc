@@ -1,0 +1,109 @@
+{
+  "name": "HallOfDiscoveryEntry",
+  "type": "object",
+  "properties": {
+    "song_id": {
+      "type": "string",
+      "description": "Reference to Song entity"
+    },
+    "song_title": {
+      "type": "string"
+    },
+    "artist_profile_id": {
+      "type": "string"
+    },
+    "artist_name": {
+      "type": "string"
+    },
+    "genre": {
+      "type": "string"
+    },
+    "cover_art": {
+      "type": "string"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "100k_club",
+        "million_club",
+        "award_winners",
+        "radio_breakthroughs",
+        "sync_success",
+        "fan_favorites"
+      ],
+      "description": "Hall of Discovery milestone category"
+    },
+    "milestone_value": {
+      "type": "number",
+      "description": "The milestone threshold value (e.g. 100000 streams, 100000 supporters)"
+    },
+    "milestone_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the milestone was achieved"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the achievement"
+    },
+    "first_release_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the song first debuted on The Mainstream Frequency"
+    },
+    "inducted_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When this entry was added to the Hall of Discovery"
+    },
+    "is_featured": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether to feature this entry prominently"
+    }
+  },
+  "required": [
+    "song_id",
+    "song_title",
+    "category",
+    "milestone_date"
+  ],
+  "rls": {
+    "read": {},
+    "create": {},
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    }
+  }
+}

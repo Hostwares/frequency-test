@@ -1,0 +1,151 @@
+{
+  "name": "Referral",
+  "type": "object",
+  "properties": {
+    "referrer_user_id": {
+      "type": "string",
+      "description": "User who made the referral"
+    },
+    "referrer_name": {
+      "type": "string"
+    },
+    "referral_code": {
+      "type": "string",
+      "description": "Unique referral code"
+    },
+    "referred_user_id": {
+      "type": "string",
+      "description": "User who was referred"
+    },
+    "referred_name": {
+      "type": "string"
+    },
+    "referred_email": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "signed_up",
+        "subscribed",
+        "rewarded",
+        "expired"
+      ],
+      "default": "pending"
+    },
+    "reward_type": {
+      "type": "string",
+      "enum": [
+        "free_month",
+        "discount",
+        "cash_bonus",
+        "badge",
+        "credit"
+      ],
+      "default": "free_month"
+    },
+    "reward_value": {
+      "type": "number",
+      "default": 0,
+      "description": "Value of the reward in dollars"
+    },
+    "is_affiliate": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether this is an affiliate (ongoing commission) vs one-time referral"
+    },
+    "commission_percentage": {
+      "type": "number",
+      "default": 0,
+      "description": "Ongoing commission percentage for affiliates"
+    },
+    "total_earned": {
+      "type": "number",
+      "default": 0,
+      "description": "Total earnings from this referral/affiliate"
+    },
+    "converted_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "rewarded_date": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "referrer_user_id",
+    "referral_code"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    }
+  }
+}

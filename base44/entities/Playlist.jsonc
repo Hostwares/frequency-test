@@ -1,0 +1,179 @@
+{
+  "name": "Playlist",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "cover_image": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "fan",
+        "artist",
+        "community",
+        "network"
+      ],
+      "default": "fan"
+    },
+    "is_funded_network": {
+      "type": "boolean",
+      "default": false,
+      "description": "Marks this playlist as Funded (true) or Personal (false). Funded playlists participate in the artist disbursement flow: when a subscriber's monthly fee is processed, a portion of the subscriber's 95% Artist Distribution Pool is routed to this playlist's eligible artists. Personal playlists (false) are for organizing and listening only and do NOT trigger any disbursement, receive no subscription funds, and have no cap regardless of the subscriber's tier. Maximum 3 funded networks per subscriber (configurable via max_funded_networks setting)."
+    },
+    "network_funding_percentage": {
+      "type": "number",
+      "description": "Custom percentage of the subscriber's Artist Distribution Pool assigned to this funded network. If any funded network has a percentage set, all must total 100%. If none set, the pool is divided equally among funded networks."
+    },
+    "artist_allocation_method": {
+      "type": "string",
+      "enum": [
+        "equal",
+        "custom",
+        "weighted",
+        "automatic"
+      ],
+      "default": "automatic",
+      "description": "How this funded network's allocation is distributed among its eligible artists after the $0.01 minimum is reserved per artist: equal (split evenly), custom (subscriber-assigned percentages), weighted (support weights), automatic (equal by default)."
+    },
+    "owner_user_id": {
+      "type": "string"
+    },
+    "community_id": {
+      "type": "string"
+    },
+    "song_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Ordered list of song IDs in the playlist. Order defines playback and display sequence and can be reordered at any time."
+    },
+    "song_entries": {
+      "type": "array",
+      "default": [],
+      "description": "Per-song membership metadata tracking when each song was added, used to enforce the 30-day disbursement eligibility lock. A song cannot be removed or swapped out until 30 days after its added_date. Kept in sync with song_ids.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "song_id": {
+            "type": "string",
+            "description": "Reference to the Song in this playlist"
+          },
+          "added_date": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When the song was added to the playlist"
+          },
+          "locked_until": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date 30 days after added_date; before this the song is locked to the month's disbursement and cannot be removed or swapped"
+          }
+        },
+        "required": [
+          "song_id",
+          "added_date"
+        ]
+      }
+    },
+    "artist_allocations": {
+      "type": "array",
+      "default": [],
+      "description": "Fan's per-artist allocation weights used to split their monthly subscription revenue across the artists in their playlist. Weights are relative and normalized at distribution time. If empty, revenue is split equally among the artists of the playlist's songs.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "artist_profile_id": {
+            "type": "string",
+            "description": "Artist receiving a share of the subscription revenue"
+          },
+          "weight": {
+            "type": "number",
+            "default": 1,
+            "description": "Relative weight for this artist's share of the playlist allocation"
+          }
+        },
+        "required": [
+          "artist_profile_id",
+          "weight"
+        ]
+      }
+    },
+    "follower_count": {
+      "type": "number",
+      "default": 0
+    },
+    "is_living": {
+      "type": "boolean",
+      "default": true,
+      "description": "Living playlists update based on votes and activity"
+    },
+    "is_paused": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether this funded playlist is paused due to a tier downgrade. Paused playlists do NOT receive disbursement funds and do NOT count against the subscriber's active funded network limit. The playlist and its songs are preserved \u2014 the subscriber can reactivate it by upgrading or by swapping it for another active playlist."
+    },
+    "paused_reason": {
+      "type": "string",
+      "description": "Why this playlist was paused (e.g. 'tier_downgrade: exceeded funded network limit of 3 for plan founding_supporter_beta')"
+    },
+    "paused_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the playlist was paused"
+    }
+  },
+  "required": [
+    "name"
+  ],
+  "rls": {
+    "read": {},
+    "create": {},
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "data.owner_user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "data.owner_user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,372 @@
+{
+  "name": "Song",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Song title"
+    },
+    "subtitle": {
+      "type": "string",
+      "description": "Subtitle or featured info (e.g. 'feat. Artist Name')"
+    },
+    "isrc": {
+      "type": "string",
+      "description": "International Standard Recording Code (ISRC), e.g. CC-XXX-YY-NNNNN"
+    },
+    "upc": {
+      "type": "string",
+      "description": "Universal Product Code (UPC) \u2014 typically at release level but can be set per-track"
+    },
+    "artist_profile_id": {
+      "type": "string",
+      "description": "Reference to ArtistProfile"
+    },
+    "artist_name": {
+      "type": "string"
+    },
+    "album": {
+      "type": "string",
+      "description": "Album or release name"
+    },
+    "release_id": {
+      "type": "string",
+      "description": "Reference to Release entity if part of a release"
+    },
+    "disc_number": {
+      "type": "number",
+      "default": 1,
+      "description": "Disc number in a multi-disc release"
+    },
+    "track_number": {
+      "type": "number",
+      "description": "Track number within the release/disc"
+    },
+    "genre": {
+      "type": "string",
+      "description": "Primary genre"
+    },
+    "sub_genre": {
+      "type": "string",
+      "description": "Sub-genre"
+    },
+    "mood": {
+      "type": "string",
+      "enum": [
+        "energetic",
+        "chill",
+        "emotional",
+        "uplifting",
+        "melancholic",
+        "romantic",
+        "angsty",
+        "peaceful",
+        "nostalgic",
+        "empowering",
+        "dark",
+        "party",
+        "workout",
+        "focus",
+        "other"
+      ],
+      "description": "Primary mood"
+    },
+    "tempo": {
+      "type": "string",
+      "enum": [
+        "very_slow",
+        "slow",
+        "medium",
+        "fast",
+        "very_fast"
+      ],
+      "description": "Relative tempo classification"
+    },
+    "bpm": {
+      "type": "number",
+      "description": "Beats per minute"
+    },
+    "key_signature": {
+      "type": "string",
+      "description": "Musical key (e.g. C Major, A Minor)"
+    },
+    "time_signature": {
+      "type": "string",
+      "description": "Time signature (e.g. 4/4, 3/4, 6/8)"
+    },
+    "language": {
+      "type": "string",
+      "description": "Primary language of lyrics (ISO 639-1 code or full name)"
+    },
+    "lyrics": {
+      "type": "string",
+      "description": "Song lyrics \u2014 plain text or LRC format [mm:ss.xx] for time-synced lyrics"
+    },
+    "writers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Songwriter credits (names)"
+    },
+    "producers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Producer credits (names)"
+    },
+    "publishers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Publishing company credits"
+    },
+    "copyright_owner": {
+      "type": "string",
+      "description": "Copyright owner of the composition"
+    },
+    "sound_recording_owner": {
+      "type": "string",
+      "description": "Owner of the sound recording / master"
+    },
+    "release_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Official release date"
+    },
+    "cover_art": {
+      "type": "string",
+      "description": "Artwork image URL"
+    },
+    "explicit_flag": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether the track contains explicit content"
+    },
+    "ai_disclosure": {
+      "type": "string",
+      "enum": [
+        "none",
+        "human_created",
+        "human_assisted",
+        "ai_assisted",
+        "ai_generated"
+      ],
+      "default": "human_created",
+      "description": "AI involvement disclosure"
+    },
+    "vocal_type": {
+      "type": "string",
+      "enum": [
+        "male",
+        "female",
+        "duet",
+        "group",
+        "instrumental",
+        "spoken_word",
+        "choir",
+        "other"
+      ],
+      "description": "Primary vocal type"
+    },
+    "is_instrumental": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether this is an instrumental track (no vocals)"
+    },
+    "featured_artists": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Featured artist names"
+    },
+    "credits": {
+      "type": "string",
+      "description": "Additional credits (musicians, engineers, studios, etc.)"
+    },
+    "performance_rights_organization": {
+      "type": "string",
+      "enum": [
+        "ascap",
+        "bmi",
+        "sesac",
+        "gmr",
+        "soundexchange",
+        "prs",
+        "gema",
+        "sacem",
+        "none",
+        "other"
+      ],
+      "description": "PRO the songwriter is registered with"
+    },
+    "territory_restrictions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "ISO country codes where this track is restricted or unavailable"
+    },
+    "duration_seconds": {
+      "type": "number"
+    },
+    "audio_url": {
+      "type": "string",
+      "description": "Primary audio file URL"
+    },
+    "play_count": {
+      "type": "number",
+      "default": 0
+    },
+    "support_count": {
+      "type": "number",
+      "default": 0
+    },
+    "verification_type": {
+      "type": "string",
+      "enum": [
+        "human_created",
+        "human_assisted",
+        "ai_assisted",
+        "ai_generated"
+      ],
+      "default": "human_created"
+    },
+    "is_featured": {
+      "type": "boolean",
+      "default": false
+    },
+    "version_type": {
+      "type": "string",
+      "enum": [
+        "original",
+        "acoustic",
+        "radio_edit",
+        "instrumental",
+        "explicit",
+        "clean",
+        "alternate_mix",
+        "remix",
+        "live",
+        "demo",
+        "extended",
+        "other"
+      ],
+      "default": "original",
+      "description": "Type of version if this is an alternate version of another song"
+    },
+    "parent_song_id": {
+      "type": "string",
+      "description": "If this is a version/variant, references the original song"
+    },
+    "version_notes": {
+      "type": "string",
+      "description": "Notes about this version (e.g. 'Radio edit with profanity removed')"
+    },
+    "is_active_version": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether this version is currently published/active"
+    },
+    "rights_verified": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether ownership/rights have been verified"
+    },
+    "split_sheet_count": {
+      "type": "number",
+      "default": 0,
+      "description": "Number of split sheet entries on file"
+    },
+    "has_open_claims": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether there are open rights claims on this track"
+    },
+    "mainstream_first_status": {
+      "type": "string",
+      "enum": [
+        "none",
+        "mainstream_first",
+        "heard_first"
+      ],
+      "default": "none",
+      "description": "Mainstream First exclusive status \u2014 mainstream_first during 12-week exclusive, heard_first after transition"
+    },
+    "mainstream_first_start_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the 12-week Mainstream First exclusive period began"
+    },
+    "mainstream_first_end_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the 12-week exclusive period ends (auto-transition to Heard First)"
+    },
+    "is_heard_first": {
+      "type": "boolean",
+      "default": false,
+      "description": "Permanent designation \u2014 song debuted on The Mainstream Frequency before wider release. Can never be removed."
+    },
+    "is_purchasable": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether this song is available for direct purchase by fans (Direct Artist Purchase)."
+    },
+    "purchase_price": {
+      "type": "number",
+      "default": 0,
+      "description": "Direct purchase price in USD (major units). Must be at least $0.50 when is_purchasable is true. A one-time commercial transaction that does not auto-enroll the artist into the buyer's funded playlist."
+    },
+    "first_release_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Date the song first debuted on The Mainstream Frequency"
+    }
+  },
+  "required": [
+    "title",
+    "artist_name"
+  ],
+  "rls": {
+    "read": {},
+    "create": {},
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "master_admin"
+          }
+        }
+      ]
+    }
+  }
+}
